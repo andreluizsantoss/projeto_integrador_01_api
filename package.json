@@ -20,6 +20,7 @@
   "author": "Andre Luiz",
   "license": "ISC",
   "devDependencies": {
+    "@types/cors": "^2.8.17",
     "@types/express": "^5.0.1",
     "@types/node": "^22.13.13",
     "@typescript-eslint/eslint-plugin": "^8.28.0",
