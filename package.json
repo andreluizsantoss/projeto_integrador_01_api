@@ -1,0 +1,12 @@
+{
+  "name": "projeto_integrador_01_api",
+  "version": "1.0.0",
+  "description": "API - Projeto Integrador I - Engenharia da Computação - UNIVESP",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": ["UNIVESP", "PROJETO", "INTEAGRADOR", "ENGENHARIA", "COMPUTAÇÃO"],
+  "author": "Andre Luiz",
+  "license": "ISC"
+}
