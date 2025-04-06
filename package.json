@@ -1,0 +1,45 @@
+{
+  "name": "projeto_integrador_01_api",
+  "version": "1.0.0",
+  "description": "API - Projeto Integrador I - Engenharia da Computação - UNIVESP",
+  "main": "index.js",
+  "scripts": {
+    "dev": "ts-node-dev -r tsconfig-paths/register --inspect --transpile-only --ignore-watch node_modules src/shared/infra/http/server.ts",
+    "build": "rimraf dist && npx tsc",
+    "lint": "eslint . --ext .ts",
+    "lint:fix": "eslint . --ext .ts --fix",
+    "start": "node --tls-min-v1.0 dist/shared/infra/http/server.js"
+  },
+  "keywords": [
+    "UNIVESP",
+    "PROJETO",
+    "INTEGRADOR",
+    "ENGENHARIA",
+    "COMPUTAÇÃO"
+  ],
+  "author": "Andre Luiz",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/cors": "^2.8.17",
+    "@types/express": "^5.0.1",
+    "@types/node": "^22.13.13",
+    "@typescript-eslint/eslint-plugin": "^8.28.0",
+    "@typescript-eslint/parser": "^8.28.0",
+    "eslint": "^9.23.0",
+    "eslint-config-prettier": "^10.1.1",
+    "eslint-plugin-prettier": "^5.2.4",
+    "prettier": "^3.5.3",
+    "ts-node-dev": "^2.0.0",
+    "tsconfig-paths": "^4.2.0",
+    "typescript": "^5.8.2"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "express-async-errors": "^3.1.1",
+    "reflect-metadata": "^0.2.2",
+    "rimraf": "^6.0.1",
+    "zod": "^3.24.2"
+  }
+}
