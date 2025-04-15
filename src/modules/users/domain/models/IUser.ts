@@ -1,7 +1,7 @@
 import { Decimal } from '@prisma/client/runtime/library'
 
 export interface IUser {
-  codigo: number
+  id: number
   username?: string
   senha?: string
   refresh_token?: string
