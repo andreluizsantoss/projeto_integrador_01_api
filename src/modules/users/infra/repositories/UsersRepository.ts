@@ -3,10 +3,10 @@ import { IUsersRepository } from '../../domain/repositories/IUsersRepository'
 import { IUser } from '../../domain/models/IUser'
 
 export class UsersRepository implements IUsersRepository {
-  async findById(id: string) {
+  async findByUsername(username: string) {
     const user = await prisma.usuario.findFirst({
       where: {
-        codigo: parseInt(id),
+        username: username,
         status: 'ATIVO',
       },
     })
