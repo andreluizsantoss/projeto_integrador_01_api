@@ -15,14 +15,14 @@ export class AuthenticateService {
 
   async execute({
     username,
-    senha,
+    password,
   }: IAuthenticateUser): Promise<IAuthenticateResponse> {
     const user = await this.usersRepository.findByUsername(username)
     if (!user) {
       throw new InvalidCredentialsError()
     }
 
-    if (senha != user.senha) {
+    if (password != user.senha) {
       throw new InvalidCredentialsError()
     }
 

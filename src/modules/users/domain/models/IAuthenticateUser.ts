@@ -1,4 +1,4 @@
 export interface IAuthenticateUser {
   username: string
-  senha: string
+  password: string
 }
