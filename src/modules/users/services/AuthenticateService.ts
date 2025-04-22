@@ -28,14 +28,14 @@ export class AuthenticateService {
 
     const access_token = sign({}, jwtConfig.jwt.secret, {
       subject: user.id.toString(),
-      // expiresIn: jwtConfig.jwt.expiresIn,
+      expiresIn: jwtConfig.jwt.expiresIn,
       issuer: 'sos-soro-pi-01',
     })
 
     const refresh_token = sign({}, jwtConfig.refreshToken.secret, {
-      // subject: user.id.toString(),
-      // expiresIn: jwtConfig.refreshToken.expiresIn,
-      // notBefore: jwtConfig.refreshToken.notBefore,
+      subject: user.id.toString(),
+      expiresIn: jwtConfig.refreshToken.expiresIn,
+      notBefore: jwtConfig.refreshToken.notBefore,
       issuer: 'sos-soro-pi-01',
     })
 

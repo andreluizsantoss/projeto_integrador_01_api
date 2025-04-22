@@ -3,7 +3,7 @@ import { env } from '@shared/env'
 export default {
   jwt: {
     secret: env.JWT_SECRET,
-    expiresIn: env.JWT_EXPIRES_IN,
+    expiresIn: env.JWT_EXPIRES_IN as string | number,
   },
   refreshToken: {
     secret: env.REFRESH_SECRET,

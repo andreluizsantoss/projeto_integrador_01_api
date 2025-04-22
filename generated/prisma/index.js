@@ -207,7 +207,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "C:\\Users\\andre\\Projetos\\projeto_integrador_01_api\\generated\\prisma",
+      "value": "C:\\Users\\andre\\Projetos\\aaaaaaaaaaaa\\projeto_integrador_01_api\\generated\\prisma",
       "fromEnvVar": null
     },
     "config": {
@@ -221,7 +221,7 @@ const config = {
       }
     ],
     "previewFeatures": [],
-    "sourceFilePath": "C:\\Users\\andre\\Projetos\\projeto_integrador_01_api\\prisma\\schema.prisma",
+    "sourceFilePath": "C:\\Users\\andre\\Projetos\\aaaaaaaaaaaa\\projeto_integrador_01_api\\prisma\\schema.prisma",
     "isCustomOutput": true
   },
   "relativeEnvPaths": {
