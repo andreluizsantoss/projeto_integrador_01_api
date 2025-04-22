@@ -1,12 +1,31 @@
 import { prisma } from '@shared/infra/http/lib/prisma'
 import { IUsersRepository } from '../../domain/repositories/IUsersRepository'
 import { IUser } from '../../domain/models/IUser'
+import { IUserDTO } from '@users/domain/models/IUserDTO'
 
 export class UsersRepository implements IUsersRepository {
   async findByUsername(username: string) {
     const user = await prisma.usuario.findFirst({
       where: {
         usuario: username,
+      },
+    })
+    return user
+  }
+
+  async findById(id: string): Promise<IUserDTO | null> {
+    const user = await prisma.usuario.findUnique({
+      where: {
+        id: parseInt(id),
+      },
+    })
+    return user
+  }
+
+  async findByToken(id: string) {
+    const user = await prisma.usuario.findFirst({
+      where: {
+        id: parseInt(id),
       },
     })
     return user
@@ -28,14 +47,5 @@ export class UsersRepository implements IUsersRepository {
       },
       data: data,
     })
-  }
-
-  async findByToken(id: string) {
-    const user = await prisma.usuario.findFirst({
-      where: {
-        id: parseInt(id),
-      },
-    })
-    return user
   }
 }

@@ -27,7 +27,6 @@ export const isAuthenticated = (
     const decodedToken = verify(token, authConfig.jwt.secret as Secret)
     const { sub } = decodedToken as JwtPayloadProps
     request.user = { id: sub }
-    console.log(request.user)
     return next()
   } catch {
     return response.status(401).json({
