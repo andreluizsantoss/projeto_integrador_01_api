@@ -17,12 +17,12 @@ exports.Prisma = Prisma
 exports.$Enums = {}
 
 /**
- * Prisma Client JS version: 6.6.0
- * Query Engine version: f676762280b54cd07c770017ed3711ddde35f37a
+ * Prisma Client JS version: 5.22.0
+ * Query Engine version: 605197351a3c8bdd595af2d2a9bc3025bca48ea2
  */
 Prisma.prismaVersion = {
-  client: "6.6.0",
-  engine: "f676762280b54cd07c770017ed3711ddde35f37a"
+  client: "5.22.0",
+  engine: "605197351a3c8bdd595af2d2a9bc3025bca48ea2"
 }
 
 Prisma.PrismaClientKnownRequestError = () => {
@@ -48,6 +48,11 @@ In case this error is unexpected for you, please report it in https://pris.ly/pr
 Prisma.PrismaClientValidationError = () => {
   const runtimeName = getRuntime().prettyName;
   throw new Error(`PrismaClientValidationError is unable to run in this browser environment, or has been bundled for the browser (running in ${runtimeName}).
+In case this error is unexpected for you, please report it in https://pris.ly/prisma-prisma-bug-report`,
+)}
+Prisma.NotFoundError = () => {
+  const runtimeName = getRuntime().prettyName;
+  throw new Error(`NotFoundError is unable to run in this browser environment, or has been bundled for the browser (running in ${runtimeName}).
 In case this error is unexpected for you, please report it in https://pris.ly/prisma-prisma-bug-report`,
 )}
 Prisma.Decimal = Decimal
@@ -184,53 +189,9 @@ exports.Prisma.SortOrder = {
   desc: 'desc'
 };
 
-exports.Prisma.atividadesfixasOrderByRelevanceFieldEnum = {
-  codigo: 'codigo',
-  descricao: 'descricao'
-};
-
-exports.Prisma.beneficiosfixosOrderByRelevanceFieldEnum = {
-  codigo: 'codigo',
-  descricao: 'descricao'
-};
-
 exports.Prisma.NullsOrder = {
   first: 'first',
   last: 'last'
-};
-
-exports.Prisma.beneficiospacienteOrderByRelevanceFieldEnum = {
-  codigo_beneficio: 'codigo_beneficio'
-};
-
-exports.Prisma.cadastroOrderByRelevanceFieldEnum = {
-  nome: 'nome',
-  documento: 'documento',
-  profissao: 'profissao',
-  cor_olhos: 'cor_olhos',
-  cor_cabelo: 'cor_cabelo',
-  etnia: 'etnia',
-  codigo_usuario: 'codigo_usuario'
-};
-
-exports.Prisma.dependenciasfixasOrderByRelevanceFieldEnum = {
-  codigo: 'codigo',
-  descricao: 'descricao'
-};
-
-exports.Prisma.dependenciaspacienteOrderByRelevanceFieldEnum = {
-  codigo_dependencia: 'codigo_dependencia'
-};
-
-exports.Prisma.historicoatividadesOrderByRelevanceFieldEnum = {
-  codigo_atividade: 'codigo_atividade'
-};
-
-exports.Prisma.usuarioOrderByRelevanceFieldEnum = {
-  usuario: 'usuario',
-  senha: 'senha',
-  refresh_token: 'refresh_token',
-  status: 'status'
 };
 exports.cadastro_sexo = exports.$Enums.cadastro_sexo = {
   Masculino: 'Masculino',
@@ -284,7 +245,7 @@ class PrismaClient {
         } else {
           message = 'PrismaClient is unable to run in this browser environment, or has been bundled for the browser (running in `' + runtime.prettyName + '`).'
         }
-
+        
         message += `
 If this is unexpected, please open an issue: https://pris.ly/prisma-prisma-bug-report`
 
