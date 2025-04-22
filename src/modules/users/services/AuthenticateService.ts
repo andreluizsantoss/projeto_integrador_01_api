@@ -5,7 +5,7 @@ import { IAuthenticateUser } from '@users/domain/models/IAuthenticateUser'
 import { IUsersRepository } from '@users/domain/repositories/IUsersRepository'
 import jwtConfig from '@config/auth'
 import { sign } from 'jsonwebtoken'
-import { UserNotPermissionError } from '@shared/errors/user_not_permission_error'
+import { UserNotPermissionError } from '@shared/errors/UserNotPermissionError'
 
 @injectable()
 export class AuthenticateService {

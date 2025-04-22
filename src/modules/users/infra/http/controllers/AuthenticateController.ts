@@ -5,7 +5,7 @@ import { UserNotLoginError } from '@shared/errors/UserNotLoginError'
 import { AuthenticateService } from '@users/services/AuthenticateService'
 import { Request, Response } from 'express'
 import { z } from 'zod'
-import { UserNotPermissionError } from '@shared/errors/user_not_permission_error'
+import { UserNotPermissionError } from '@shared/errors/UserNotPermissionError'
 
 export default class AuthenticateController {
   public async session(
