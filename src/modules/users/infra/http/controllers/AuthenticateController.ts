@@ -39,7 +39,7 @@ export default class AuthenticateController {
         return response.status(400).send({ message: err.message })
       }
       if (err instanceof UserNotPermissionError) {
-        return response.status(400).send({ message: err.message })
+        return response.status(403).send({ message: err.message })
       }
       if (err instanceof UserNotLoginError) {
         return response.status(403).send({ message: err.message })
