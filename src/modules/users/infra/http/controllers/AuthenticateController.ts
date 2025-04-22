@@ -1,9 +1,9 @@
+import { container } from 'tsyringe'
 import { InvalidCredentialsError } from '@shared/errors/InvalidCredentialsError'
 import { UserNotFoundError } from '@shared/errors/UserNotFoundError'
 import { UserNotLoginError } from '@shared/errors/UserNotLoginError'
 import { AuthenticateService } from '@users/services/AuthenticateService'
 import { Request, Response } from 'express'
-import { container } from 'tsyringe'
 import { z } from 'zod'
 
 export default class AuthenticateController {
@@ -19,11 +19,13 @@ export default class AuthenticateController {
     const { username, password } = bodySchema.parse(request.body)
 
     try {
-      const service = container.resolve(AuthenticateService)
-      const { access_token, refresh_token } = await service.execute({
-        username,
-        password,
-      })
+      const authenticateService = container.resolve(AuthenticateService)
+      const { access_token, refresh_token } = await authenticateService.execute(
+        {
+          username,
+          password,
+        },
+      )
       return response.status(200).send({
         access_token,
         refresh_token,

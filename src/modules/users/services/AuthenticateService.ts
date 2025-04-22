@@ -1,8 +1,8 @@
+import { inject, injectable } from 'tsyringe'
 import { InvalidCredentialsError } from '@shared/errors/InvalidCredentialsError'
 import { IAuthenticateResponse } from '@users/domain/models/IAuthenticateResponse'
 import { IAuthenticateUser } from '@users/domain/models/IAuthenticateUser'
 import { IUsersRepository } from '@users/domain/repositories/IUsersRepository'
-import { inject, injectable } from 'tsyringe'
 import jwtConfig from '@config/auth'
 import { sign } from 'jsonwebtoken'
 
