@@ -1,10 +1,11 @@
 import 'reflect-metadata'
 import { env } from '@shared/env'
-import express, { Request, Response, NextFunction } from 'express'
+import '@shared/infra/http/container'
+import express, { NextFunction, Request, Response } from 'express'
 import 'express-async-errors'
 import cors from 'cors'
-import { ZodError } from 'zod'
 import { routes } from './routes'
+import { ZodError } from 'zod'
 
 const app = express()
 app.use(cors())

@@ -6,7 +6,7 @@ export class UsersRepository implements IUsersRepository {
   async findByUsername(username: string) {
     const user = await prisma.usuario.findFirst({
       where: {
-        username: username,
+        usuario: username,
         status: 'ATIVO',
       },
     })
