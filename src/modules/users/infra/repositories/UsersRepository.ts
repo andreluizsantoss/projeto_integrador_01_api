@@ -34,7 +34,6 @@ export class UsersRepository implements IUsersRepository {
     const user = await prisma.usuario.findFirst({
       where: {
         id: parseInt(id),
-        status: 'ATIVO',
       },
     })
     return user

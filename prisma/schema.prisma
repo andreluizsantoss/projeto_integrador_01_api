@@ -84,6 +84,7 @@ model historicoatividades {
 
 model usuario {
   id            Int     @id @default(autoincrement())
+  nome          String  @db.VarChar(150)
   usuario       String  @unique(map: "usuario_UNIQUE") @db.VarChar(80)
   senha         String  @db.VarChar(20)
   refresh_token String? @db.Text
@@ -100,7 +101,7 @@ enum cadastro_estado_civil {
   Solteiro
   Casado
   Divorciado
-  Vi_vo      @map("Viúvo")
+  Viuvo      @map("Viúvo")
   Outro
 }
 
