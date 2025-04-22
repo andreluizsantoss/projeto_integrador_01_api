@@ -7,7 +7,6 @@ export class UsersRepository implements IUsersRepository {
     const user = await prisma.usuario.findFirst({
       where: {
         usuario: username,
-        status: 'ATIVO',
       },
     })
     return user

@@ -5,6 +5,7 @@ import { UserNotLoginError } from '@shared/errors/UserNotLoginError'
 import { AuthenticateService } from '@users/services/AuthenticateService'
 import { Request, Response } from 'express'
 import { z } from 'zod'
+import { UserNotPermissionError } from '@shared/errors/user_not_permission_error'
 
 export default class AuthenticateController {
   public async session(
@@ -35,6 +36,9 @@ export default class AuthenticateController {
         return response.status(400).send({ message: err.message })
       }
       if (err instanceof UserNotFoundError) {
+        return response.status(400).send({ message: err.message })
+      }
+      if (err instanceof UserNotPermissionError) {
         return response.status(400).send({ message: err.message })
       }
       if (err instanceof UserNotLoginError) {

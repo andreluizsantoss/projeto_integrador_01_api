@@ -5,6 +5,7 @@ import { IAuthenticateUser } from '@users/domain/models/IAuthenticateUser'
 import { IUsersRepository } from '@users/domain/repositories/IUsersRepository'
 import jwtConfig from '@config/auth'
 import { sign } from 'jsonwebtoken'
+import { UserNotPermissionError } from '@shared/errors/user_not_permission_error'
 
 @injectable()
 export class AuthenticateService {
@@ -20,6 +21,10 @@ export class AuthenticateService {
     const user = await this.usersRepository.findByUsername(username)
     if (!user) {
       throw new InvalidCredentialsError()
+    }
+
+    if (user.status != 'ATIVO') {
+      throw new UserNotPermissionError()
     }
 
     if (password != user.senha) {
