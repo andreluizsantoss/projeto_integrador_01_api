@@ -4,13 +4,6 @@ import AuthenticateController from '@users/infra/http/controllers/AuthenticateCo
 import { UsersRepository } from '@users/infra/repositories/UsersRepository'
 import FindByTokenController from '@users/infra/http/controllers/FindByTokenController'
 import UpdateTokenController from '@users/infra/http/controllers/UpdateTokenController'
-import { IFixedActivitiesRepository } from 'src/modules/fixed_activities/domain/repositories/IFixedActivitiesRepository'
-import { FixedActivitiesRepository } from 'src/modules/fixed_activities/infra/repositories/FixedActivitiesRepository'
-import FindAllFixedActivitiesController from 'src/modules/fixed_activities/infra/http/controllers/FindAllFixedActivitiesController'
-import FindFixedActivitieByCodigoController from 'src/modules/fixed_activities/infra/http/controllers/FindFixedActivitieByCodigoController'
-import RegisterFixedActivitieController from 'src/modules/fixed_activities/infra/http/controllers/RegisterFixedActivitieController'
-import UpdateFixedActivitieController from 'src/modules/fixed_activities/infra/http/controllers/UpdateFixedActivitieController'
-import DeleteFixedActivitieController from 'src/modules/fixed_activities/infra/http/controllers/DeleteFixedActivitieController'
 import { FixedBenefitsRepository } from '@fixedBenefits/infra/repositories/FixedBenefitsRepository'
 import { IFixedBenefitsRepository } from '@fixedBenefits/domain/repositories/IFixedBenefitsRepository'
 import FindAllFixedBenefitsController from '@fixedBenefits/infra/http/controllers/FindAllFixedBenefitsController'
@@ -18,6 +11,13 @@ import FindFixedBenefitByCodigoController from '@fixedBenefits/infra/http/contro
 import RegisterFixedBenefitController from '@fixedBenefits/infra/http/controllers/RegisterFixedBenefitController'
 import UpdateFixedBenefitController from '@fixedBenefits/infra/http/controllers/UpdateFixedBenefitController'
 import DeleteFixedBenefitController from '@fixedBenefits/infra/http/controllers/DeleteFixedBenefitController'
+import { IFixedActivitiesRepository } from '@fixedActivities/domain/repositories/IFixedActivitiesRepository'
+import DeleteFixedActivitieController from '@fixedActivities/infra/http/controllers/DeleteFixedActivitieController'
+import FindAllFixedActivitiesController from '@fixedActivities/infra/http/controllers/FindAllFixedActivitiesController'
+import FindFixedActivitieByCodigoController from '@fixedActivities/infra/http/controllers/FindFixedActivitieByCodigoController'
+import RegisterFixedActivitieController from '@fixedActivities/infra/http/controllers/RegisterFixedActivitieController'
+import UpdateFixedActivitieController from '@fixedActivities/infra/http/controllers/UpdateFixedActivitieController'
+import { FixedActivitiesRepository } from '@fixedActivities/infra/repositories/FixedActivitiesRepository'
 
 container.registerSingleton<IUsersRepository>(
   'UsersRepository',

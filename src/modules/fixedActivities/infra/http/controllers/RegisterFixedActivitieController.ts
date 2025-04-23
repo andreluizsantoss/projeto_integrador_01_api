@@ -1,5 +1,5 @@
+import { RegisterFixedActivitieService } from '@fixedActivities/services/RegisterFixedActivitieService'
 import { Request, Response } from 'express'
-import { RegisterFixedActivitieService } from 'src/modules/fixed_activities/services/RegisterFixedActivitieService'
 import { container } from 'tsyringe'
 import { z } from 'zod'
 
@@ -11,10 +11,10 @@ export default class RegisterFixedActivitieController {
     const { descricao } = bodySchema.parse(request.body)
     try {
       const service = container.resolve(RegisterFixedActivitieService)
-      const fixedActivitie = await service.execute({
+      const result = await service.execute({
         descricao,
       })
-      return response.json(fixedActivitie)
+      return response.json(result)
     } catch (err) {
       throw err
     }

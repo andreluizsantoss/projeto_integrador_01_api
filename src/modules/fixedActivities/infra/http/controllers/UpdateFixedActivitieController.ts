@@ -1,6 +1,6 @@
+import { UpdateFixedActivitieService } from '@fixedActivities/services/UpdateFixedActivitieService'
 import { FixedActivitieNotFoundError } from '@shared/errors/FixedActivitieNotFoundError'
 import { Request, Response } from 'express'
-import { UpdateFixedActivitieService } from 'src/modules/fixed_activities/services/UpdateFixedActivitieService'
 import { container } from 'tsyringe'
 import { z } from 'zod'
 
@@ -13,11 +13,11 @@ export default class UpdateFixedActivitieController {
     const { codigo, descricao } = bodySchema.parse(request.body)
     try {
       const service = container.resolve(UpdateFixedActivitieService)
-      const fixedActivitie = await service.execute({
+      const result = await service.execute({
         codigo,
         descricao,
       })
-      return response.json(fixedActivitie)
+      return response.json(result)
     } catch (err) {
       if (err instanceof FixedActivitieNotFoundError) {
         return response.status(400).send({ message: err.message })

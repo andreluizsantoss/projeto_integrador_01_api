@@ -1,6 +1,6 @@
+import { IFixedActivitie } from '@fixedActivities/domain/models/IFixedActivitie'
+import { IFixedActivitiesRepository } from '@fixedActivities/domain/repositories/IFixedActivitiesRepository'
 import { inject, injectable } from 'tsyringe'
-import { IFixedActivities } from '../domain/models/IFixedActivities'
-import { IFixedActivitiesRepository } from '../domain/repositories/IFixedActivitiesRepository'
 
 @injectable()
 export class FindAllFixedActivitiesService {
@@ -9,7 +9,7 @@ export class FindAllFixedActivitiesService {
     private fixedActivitiesRepository: IFixedActivitiesRepository,
   ) {}
 
-  async execute(): Promise<IFixedActivities[]> {
+  async execute(): Promise<IFixedActivitie[]> {
     const result = await this.fixedActivitiesRepository.findAllFixedActivities()
     return result
   }

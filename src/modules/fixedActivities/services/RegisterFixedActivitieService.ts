@@ -1,7 +1,7 @@
+import { IFixedActivitie } from '@fixedActivities/domain/models/IFixedActivitie'
+import { IRegisterFixedActivitie } from '@fixedActivities/domain/models/IRegisterFixedActivitie'
+import { IFixedActivitiesRepository } from '@fixedActivities/domain/repositories/IFixedActivitiesRepository'
 import { inject, injectable } from 'tsyringe'
-import { IRegisterFixedActivitie } from '../domain/models/IRegisterFixedActivitie'
-import { IFixedActivities } from '../domain/models/IFixedActivities'
-import { IFixedActivitiesRepository } from '../domain/repositories/IFixedActivitiesRepository'
 
 @injectable()
 export class RegisterFixedActivitieService {
@@ -12,7 +12,7 @@ export class RegisterFixedActivitieService {
 
   async execute({
     descricao,
-  }: IRegisterFixedActivitie): Promise<IFixedActivities | null> {
+  }: IRegisterFixedActivitie): Promise<IFixedActivitie | null> {
     const fixedActivitie =
       await this.fixedActivitiesRepository.registerFixedActivitie(descricao)
     return fixedActivitie

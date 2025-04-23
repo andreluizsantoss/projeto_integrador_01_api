@@ -1,7 +1,7 @@
-import { inject, injectable } from 'tsyringe'
-import { IFixedActivitiesRepository } from '../domain/repositories/IFixedActivitiesRepository'
+import { IDeleteFixedActivitie } from '@fixedActivities/domain/models/IDeleteFixedActivitie'
+import { IFixedActivitiesRepository } from '@fixedActivities/domain/repositories/IFixedActivitiesRepository'
 import { FixedActivitieNotFoundError } from '@shared/errors/FixedActivitieNotFoundError'
-import { IDeleteFixedActivitie } from '../domain/models/IDeleteFixedActivitie'
+import { inject, injectable } from 'tsyringe'
 
 @injectable()
 export class DeleteFixedActivitieService {
@@ -12,7 +12,7 @@ export class DeleteFixedActivitieService {
 
   async execute({ codigo }: IDeleteFixedActivitie): Promise<void> {
     const result =
-      await this.fixedActivitiesRepository.findByCodigoFixedActivities(codigo)
+      await this.fixedActivitiesRepository.findFixedActivitieByCodigo(codigo)
 
     if (!result) {
       throw new FixedActivitieNotFoundError()

@@ -1,6 +1,6 @@
+import { DeleteFixedActivitieService } from '@fixedActivities/services/DeleteFixedActivitieService'
 import { FixedActivitieNotFoundError } from '@shared/errors/FixedActivitieNotFoundError'
 import { Request, Response } from 'express'
-import { DeleteFixedActivitieService } from 'src/modules/fixed_activities/services/DeleteFixedActivitieService'
 import { container } from 'tsyringe'
 import { z } from 'zod'
 

@@ -1,11 +1,11 @@
 import { Router } from 'express'
 import { container } from 'tsyringe'
+import { isAuthenticated } from '@shared/middlewares/isAuthenticated'
+import DeleteFixedActivitieController from '../controllers/DeleteFixedActivitieController'
 import FindAllFixedActivitiesController from '../controllers/FindAllFixedActivitiesController'
 import FindFixedActivitieByCodigoController from '../controllers/FindFixedActivitieByCodigoController'
-import { isAuthenticated } from '@shared/middlewares/isAuthenticated'
 import RegisterFixedActivitieController from '../controllers/RegisterFixedActivitieController'
 import UpdateFixedActivitieController from '../controllers/UpdateFixedActivitieController'
-import DeleteFixedActivitieController from '../controllers/DeleteFixedActivitieController'
 
 const fixedActivitieRouter = Router()
 const findAllFixedActivitiesController = container.resolve(

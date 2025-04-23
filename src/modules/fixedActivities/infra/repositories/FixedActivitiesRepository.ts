@@ -1,9 +1,9 @@
+import { IFixedActivitie } from '@fixedActivities/domain/models/IFixedActivitie'
+import { IFixedActivitiesRepository } from '@fixedActivities/domain/repositories/IFixedActivitiesRepository'
 import { prisma } from '@shared/infra/http/lib/prisma'
-import { IFixedActivitiesRepository } from '../../domain/repositories/IFixedActivitiesRepository'
-import { IFixedActivities } from '../../domain/models/IFixedActivities'
 
 export class FixedActivitiesRepository implements IFixedActivitiesRepository {
-  async findAllFixedActivities(): Promise<IFixedActivities[]> {
+  async findAllFixedActivities(): Promise<IFixedActivitie[]> {
     const fixedActivities = await prisma.atividadesfixas.findMany({
       orderBy: {
         descricao: 'desc',
@@ -12,9 +12,9 @@ export class FixedActivitiesRepository implements IFixedActivitiesRepository {
     return fixedActivities
   }
 
-  async findByCodigoFixedActivities(
+  async findFixedActivitieByCodigo(
     codigo: string,
-  ): Promise<IFixedActivities | null> {
+  ): Promise<IFixedActivitie | null> {
     const fixedActivitie = await prisma.atividadesfixas.findUnique({
       where: {
         codigo: codigo,
@@ -25,7 +25,7 @@ export class FixedActivitiesRepository implements IFixedActivitiesRepository {
 
   async registerFixedActivitie(
     descricao: string,
-  ): Promise<IFixedActivities | null> {
+  ): Promise<IFixedActivitie | null> {
     const getNextCode = async (tableName: string, columnName: string) => {
       const lastRecord = await prisma[tableName].findFirst({
         orderBy: {
@@ -61,7 +61,7 @@ export class FixedActivitiesRepository implements IFixedActivitiesRepository {
   async updateFixedActivitie(
     codigo: string,
     descricao: string,
-  ): Promise<IFixedActivities | null> {
+  ): Promise<IFixedActivitie | null> {
     const fixedActivitie = await prisma.atividadesfixas.update({
       where: {
         codigo: codigo,

@@ -1,7 +1,7 @@
 import authenticateRouter from '@users/infra/http/routes/AuthenticateRoutes'
 import { Router } from 'express'
-import fixedActivitieRouter from 'src/modules/fixed_activities/infra/http/routes/FixedActivitieRoutes'
 import fixedBenefitRouter from '@fixedBenefits/infra/http/routes/FixedBenefitRoutes'
+import fixedActivitieRouter from '@fixedActivities/infra/http/routes/FixedActivitieRoutes'
 
 const routes = Router()
 
