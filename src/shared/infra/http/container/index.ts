@@ -11,6 +11,13 @@ import FindFixedActivitieByCodigoController from 'src/modules/fixed_activities/i
 import RegisterFixedActivitieController from 'src/modules/fixed_activities/infra/http/controllers/RegisterFixedActivitieController'
 import UpdateFixedActivitieController from 'src/modules/fixed_activities/infra/http/controllers/UpdateFixedActivitieController'
 import DeleteFixedActivitieController from 'src/modules/fixed_activities/infra/http/controllers/DeleteFixedActivitieController'
+import { FixedBenefitsRepository } from '@fixedBenefits/infra/repositories/FixedBenefitsRepository'
+import { IFixedBenefitsRepository } from '@fixedBenefits/domain/repositories/IFixedBenefitsRepository'
+import FindAllFixedBenefitsController from '@fixedBenefits/infra/http/controllers/FindAllFixedBenefitsController'
+import FindFixedBenefitByCodigoController from '@fixedBenefits/infra/http/controllers/FindFixedBenefitByCodigoController'
+import RegisterFixedBenefitController from '@fixedBenefits/infra/http/controllers/RegisterFixedBenefitController'
+import UpdateFixedBenefitController from '@fixedBenefits/infra/http/controllers/UpdateFixedBenefitController'
+import DeleteFixedBenefitController from '@fixedBenefits/infra/http/controllers/DeleteFixedBenefitController'
 
 container.registerSingleton<IUsersRepository>(
   'UsersRepository',
@@ -19,6 +26,10 @@ container.registerSingleton<IUsersRepository>(
 container.registerSingleton<IFixedActivitiesRepository>(
   'FixedActivitiesRepository',
   FixedActivitiesRepository,
+)
+container.registerSingleton<IFixedBenefitsRepository>(
+  'FixedBenefitsRepository',
+  FixedBenefitsRepository,
 )
 
 container.registerSingleton('AuthenticateController', AuthenticateController)
@@ -44,4 +55,25 @@ container.registerSingleton(
 container.registerSingleton(
   'DeleteFixedActivitieController',
   DeleteFixedActivitieController,
+)
+
+container.registerSingleton(
+  'FindAllFixedBenefitsController',
+  FindAllFixedBenefitsController,
+)
+container.registerSingleton(
+  'FindFixedBenefitByCodigoController',
+  FindFixedBenefitByCodigoController,
+)
+container.registerSingleton(
+  'RegisterFixedBenefitController',
+  RegisterFixedBenefitController,
+)
+container.registerSingleton(
+  'UpdateFixedBenefitController',
+  UpdateFixedBenefitController,
+)
+container.registerSingleton(
+  'DeleteFixedBenefitController',
+  DeleteFixedBenefitController,
 )

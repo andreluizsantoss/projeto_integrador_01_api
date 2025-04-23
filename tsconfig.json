@@ -32,6 +32,8 @@
     "paths": {
       "@shared/*": ["src/shared/*"],
       "@users/*": ["src/modules/users/*"],
+      "@fixedActivities/*": ["src/modules/fixedActivities/*"],
+      "@fixedBenefits/*": ["src/modules/fixedBenefits/*"],
       "@config/*": ["src/shared/config/*"]
       // "@fcm/*": ["src/modules/fcm/*"],
     } /* Specify a set of entries that re-map imports to additional lookup locations. */,
