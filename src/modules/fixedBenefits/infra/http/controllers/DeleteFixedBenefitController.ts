@@ -20,6 +20,15 @@ export default class DeleteFixedBenefitController {
       if (err instanceof FixedBenefitNotFoundError) {
         return response.status(400).send({ message: err.message })
       }
+      if (
+        err instanceof Error &&
+        err.message.includes('Foreign key constraint violated')
+      ) {
+        return response.status(400).send({
+          message:
+            'This record could not be removed because it is being referenced by another record.',
+        })
+      }
       throw err
     }
   }

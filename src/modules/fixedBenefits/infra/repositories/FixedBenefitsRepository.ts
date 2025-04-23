@@ -36,7 +36,8 @@ export class FixedBenefitsRepository implements IFixedBenefitsRepository {
       if (lastRecord && lastRecord[columnName]) {
         const numericPart =
           parseInt(lastRecord[columnName].substring(1), 10) + 1
-        return `B${numericPart}`
+        const paddedPart = numericPart.toString().padStart(2, '0')
+        return `B${paddedPart}`
       } else {
         return 'B01'
       }
