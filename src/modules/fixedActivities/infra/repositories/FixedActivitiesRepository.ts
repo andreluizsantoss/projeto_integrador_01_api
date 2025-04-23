@@ -38,7 +38,8 @@ export class FixedActivitiesRepository implements IFixedActivitiesRepository {
       if (lastRecord && lastRecord[columnName]) {
         const numericPart =
           parseInt(lastRecord[columnName].substring(1), 10) + 1
-        return `U${numericPart}`
+        const paddedPart = numericPart.toString().padStart(2, '0')
+        return `U${paddedPart}`
       } else {
         return 'U01'
       }
