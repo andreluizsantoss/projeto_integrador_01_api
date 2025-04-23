@@ -18,6 +18,13 @@ import FindFixedActivitieByCodigoController from '@fixedActivities/infra/http/co
 import RegisterFixedActivitieController from '@fixedActivities/infra/http/controllers/RegisterFixedActivitieController'
 import UpdateFixedActivitieController from '@fixedActivities/infra/http/controllers/UpdateFixedActivitieController'
 import { FixedActivitiesRepository } from '@fixedActivities/infra/repositories/FixedActivitiesRepository'
+import { FixedDependenciesRepository } from '@fixedDependencies/infra/repositories/FixedDependenciesRepository'
+import { IFixedDependenciesRepository } from '@fixedDependencies/domain/repositories/IFixedDependenciesRepository'
+import FindAllFixedDependenciesController from '@fixedDependencies/infra/http/controllers/FindAllFixedDependenciesController'
+import FindFixedDependencieByCodigoController from '@fixedDependencies/infra/http/controllers/FindFixedDependencieByCodigoController'
+import RegisterFixedDependencieController from '@fixedDependencies/infra/http/controllers/RegisterFixedDependencieController'
+import UpdateFixedDependencieController from '@fixedDependencies/infra/http/controllers/UpdateFixedDependencieController'
+import DeleteFixedDependencieController from '@fixedDependencies/infra/http/controllers/DeleteFixedDependencieController'
 
 container.registerSingleton<IUsersRepository>(
   'UsersRepository',
@@ -30,6 +37,10 @@ container.registerSingleton<IFixedActivitiesRepository>(
 container.registerSingleton<IFixedBenefitsRepository>(
   'FixedBenefitsRepository',
   FixedBenefitsRepository,
+)
+container.registerSingleton<IFixedDependenciesRepository>(
+  'FixedDependenciesRepository',
+  FixedDependenciesRepository,
 )
 
 container.registerSingleton('AuthenticateController', AuthenticateController)
@@ -76,4 +87,25 @@ container.registerSingleton(
 container.registerSingleton(
   'DeleteFixedBenefitController',
   DeleteFixedBenefitController,
+)
+
+container.registerSingleton(
+  'FindAllFixedDependenciesController',
+  FindAllFixedDependenciesController,
+)
+container.registerSingleton(
+  'FindFixedDependencieByCodigoController',
+  FindFixedDependencieByCodigoController,
+)
+container.registerSingleton(
+  'RegisterFixedDependencieController',
+  RegisterFixedDependencieController,
+)
+container.registerSingleton(
+  'UpdateFixedDependencieController',
+  UpdateFixedDependencieController,
+)
+container.registerSingleton(
+  'DeleteFixedDependencieController',
+  DeleteFixedDependencieController,
 )
