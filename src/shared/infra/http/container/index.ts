@@ -25,6 +25,13 @@ import FindFixedDependencieByCodigoController from '@fixedDependencies/infra/htt
 import RegisterFixedDependencieController from '@fixedDependencies/infra/http/controllers/RegisterFixedDependencieController'
 import UpdateFixedDependencieController from '@fixedDependencies/infra/http/controllers/UpdateFixedDependencieController'
 import DeleteFixedDependencieController from '@fixedDependencies/infra/http/controllers/DeleteFixedDependencieController'
+import { PatientsRepository } from '@patients/infra/repositories/PatientsRepository'
+import { IPatientsRepository } from '@patients/domain/repositories/IPatientsRepository'
+import FindAllPatientsController from '@patients/infra/http/controllers/FindAllPatientsController'
+import FindPatientByCodigoController from '@patients/infra/http/controllers/FindPatientByCodigoController'
+import RegisterPatientController from '@patients/infra/http/controllers/RegisterPatientController'
+import UpdatePatientController from '@patients/infra/http/controllers/UpdatePatientController'
+import DeletePatientController from '@patients/infra/http/controllers/DeletePatientController'
 
 container.registerSingleton<IUsersRepository>(
   'UsersRepository',
@@ -41,6 +48,10 @@ container.registerSingleton<IFixedBenefitsRepository>(
 container.registerSingleton<IFixedDependenciesRepository>(
   'FixedDependenciesRepository',
   FixedDependenciesRepository,
+)
+container.registerSingleton<IPatientsRepository>(
+  'PatientsRepository',
+  PatientsRepository,
 )
 
 container.registerSingleton('AuthenticateController', AuthenticateController)
@@ -109,3 +120,18 @@ container.registerSingleton(
   'DeleteFixedDependencieController',
   DeleteFixedDependencieController,
 )
+
+container.registerSingleton(
+  'FindAllPatientsController',
+  FindAllPatientsController,
+)
+container.registerSingleton(
+  'FindPatientByCodigoController',
+  FindPatientByCodigoController,
+)
+container.registerSingleton(
+  'RegisterPatientController',
+  RegisterPatientController,
+)
+container.registerSingleton('UpdatePatientController', UpdatePatientController)
+container.registerSingleton('DeletePatientController', DeletePatientController)

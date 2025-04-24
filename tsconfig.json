@@ -35,6 +35,7 @@
       "@fixedActivities/*": ["src/modules/fixedActivities/*"],
       "@fixedBenefits/*": ["src/modules/fixedBenefits/*"],
       "@fixedDependencies/*": ["src/modules/fixedDependencies/*"],
+      "@patients/*": ["src/modules/patients/*"],
       "@config/*": ["src/shared/config/*"]
       // "@fcm/*": ["src/modules/fcm/*"],
     } /* Specify a set of entries that re-map imports to additional lookup locations. */,
