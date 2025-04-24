@@ -32,6 +32,13 @@ import FindPatientByCodigoController from '@patients/infra/http/controllers/Find
 import RegisterPatientController from '@patients/infra/http/controllers/RegisterPatientController'
 import UpdatePatientController from '@patients/infra/http/controllers/UpdatePatientController'
 import DeletePatientController from '@patients/infra/http/controllers/DeletePatientController'
+import { PatientBenefitsRepository } from '@patientBenefits/infra/repositories/PatientBenefitsRepository'
+import { IPatientBenefitsRepository } from '@patientBenefits/domain/repositories/IPatientBenefitsRepository'
+import FindAllPatientBenefitsController from '@patientBenefits/infra/http/controllers/FindAllPatientBenefitsController'
+import FindPatientBenefitByCodigoController from '@patientBenefits/infra/http/controllers/FindPatientBenefitByCodigoController'
+import RegisterPatientBenefitController from '@patientBenefits/infra/http/controllers/RegisterPatientBenefitController'
+import UpdatePatientBenefitController from '@patientBenefits/infra/http/controllers/UpdatePatientBenefitController'
+import DeletePatientBenefitController from '@patientBenefits/infra/http/controllers/DeletePatientBenefitController'
 
 container.registerSingleton<IUsersRepository>(
   'UsersRepository',
@@ -52,6 +59,10 @@ container.registerSingleton<IFixedDependenciesRepository>(
 container.registerSingleton<IPatientsRepository>(
   'PatientsRepository',
   PatientsRepository,
+)
+container.registerSingleton<IPatientBenefitsRepository>(
+  'PatientBenefitsRepository',
+  PatientBenefitsRepository,
 )
 
 container.registerSingleton('AuthenticateController', AuthenticateController)
@@ -135,3 +146,24 @@ container.registerSingleton(
 )
 container.registerSingleton('UpdatePatientController', UpdatePatientController)
 container.registerSingleton('DeletePatientController', DeletePatientController)
+
+container.registerSingleton(
+  'FindAllPatientBenefitsController',
+  FindAllPatientBenefitsController,
+)
+container.registerSingleton(
+  'FindPatientBenefitByCodigoController',
+  FindPatientBenefitByCodigoController,
+)
+container.registerSingleton(
+  'RegisterPatientBenefitController',
+  RegisterPatientBenefitController,
+)
+container.registerSingleton(
+  'UpdatePatientBenefitController',
+  UpdatePatientBenefitController,
+)
+container.registerSingleton(
+  'DeletePatientBenefitController',
+  DeletePatientBenefitController,
+)
