@@ -6,6 +6,7 @@ import fixedDependencieRouter from '@fixedDependencies/infra/http/routes/FixedDe
 import patientRouter from '@patients/infra/http/routes/PatientRoutes'
 import patientBenefitRouter from '@patientBenefits/infra/http/routes/PatientBenefitRoutes'
 import patientDependencieRouter from '@patientDependencies/infra/http/routes/PatientDependencieRoutes'
+import historyActivitieRouter from '@historyActivities/infra/http/routes/HistoryActivitieRoutes'
 
 const routes = Router()
 
@@ -16,5 +17,6 @@ routes.use('/fixed-dependencie', fixedDependencieRouter)
 routes.use('/patient', patientRouter)
 routes.use('/patient-benefit', patientBenefitRouter)
 routes.use('/patient-dependencie', patientDependencieRouter)
+routes.use('/history-activitie', historyActivitieRouter)
 
 export { routes }

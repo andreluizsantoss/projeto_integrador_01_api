@@ -46,6 +46,13 @@ import FindPatientDependencieByCodigoController from '@patientDependencies/infra
 import RegisterPatientDependencieController from '@patientDependencies/infra/http/controllers/RegisterPatientDependencieController'
 import UpdatePatientDependencieController from '@patientDependencies/infra/http/controllers/UpdatePatientDependencieController'
 import DeletePatientDependencieController from '@patientDependencies/infra/http/controllers/DeletePatientDependencieController'
+import { IHistoryActivitiesRepository } from '@historyActivities/domain/repositories/IHistoryActivitiesRepository'
+import { HistoryActivitiesRepository } from '@historyActivities/infra/repositories/HistoryActivitiesRepository'
+import DeleteHistoryActivitieController from '@historyActivities/infra/http/controllers/DeleteHistoryActivitieController'
+import UpdateHistoryActivitieController from '@historyActivities/infra/http/controllers/UpdateHistoryActivitieController'
+import RegisterHistoryActivitieController from '@historyActivities/infra/http/controllers/RegisterHistoryActivitieController'
+import FindHistoryActivitieByCodigoController from '@historyActivities/infra/http/controllers/FindHistoryActivitieByCodigoController'
+import FindAllHistoryActivitiesController from '@historyActivities/infra/http/controllers/FindAllHistoryActivitiesController'
 
 container.registerSingleton<IUsersRepository>(
   'UsersRepository',
@@ -74,6 +81,10 @@ container.registerSingleton<IPatientBenefitsRepository>(
 container.registerSingleton<IPatientDependenciesRepository>(
   'PatientDependenciesRepository',
   PatientDependenciesRepository,
+)
+container.registerSingleton<IHistoryActivitiesRepository>(
+  'HistoryActivitiesRepository',
+  HistoryActivitiesRepository,
 )
 
 container.registerSingleton('AuthenticateController', AuthenticateController)
@@ -198,4 +209,25 @@ container.registerSingleton(
 container.registerSingleton(
   'DeletePatientDependencieController',
   DeletePatientDependencieController,
+)
+
+container.registerSingleton(
+  'FindAllHistoryActivitiesController',
+  FindAllHistoryActivitiesController,
+)
+container.registerSingleton(
+  'FindHistoryActivitieByCodigoController',
+  FindHistoryActivitieByCodigoController,
+)
+container.registerSingleton(
+  'RegisterHistoryActivitieController',
+  RegisterHistoryActivitieController,
+)
+container.registerSingleton(
+  'UpdateHistoryActivitieController',
+  UpdateHistoryActivitieController,
+)
+container.registerSingleton(
+  'DeleteHistoryActivitieController',
+  DeleteHistoryActivitieController,
 )
