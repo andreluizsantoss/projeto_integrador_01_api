@@ -39,6 +39,13 @@ import FindPatientBenefitByCodigoController from '@patientBenefits/infra/http/co
 import RegisterPatientBenefitController from '@patientBenefits/infra/http/controllers/RegisterPatientBenefitController'
 import UpdatePatientBenefitController from '@patientBenefits/infra/http/controllers/UpdatePatientBenefitController'
 import DeletePatientBenefitController from '@patientBenefits/infra/http/controllers/DeletePatientBenefitController'
+import { PatientDependenciesRepository } from '@patientDependencies/infra/repositories/PatientDependenciesRepository'
+import { IPatientDependenciesRepository } from '@patientDependencies/domain/repositories/IPatientDependenciesRepository'
+import FindAllPatientDependenciesController from '@patientDependencies/infra/http/controllers/FindAllPatientDependenciesController'
+import FindPatientDependencieByCodigoController from '@patientDependencies/infra/http/controllers/FindPatientDependencieByCodigoController'
+import RegisterPatientDependencieController from '@patientDependencies/infra/http/controllers/RegisterPatientDependencieController'
+import UpdatePatientDependencieController from '@patientDependencies/infra/http/controllers/UpdatePatientDependencieController'
+import DeletePatientDependencieController from '@patientDependencies/infra/http/controllers/DeletePatientDependencieController'
 
 container.registerSingleton<IUsersRepository>(
   'UsersRepository',
@@ -63,6 +70,10 @@ container.registerSingleton<IPatientsRepository>(
 container.registerSingleton<IPatientBenefitsRepository>(
   'PatientBenefitsRepository',
   PatientBenefitsRepository,
+)
+container.registerSingleton<IPatientDependenciesRepository>(
+  'PatientDependenciesRepository',
+  PatientDependenciesRepository,
 )
 
 container.registerSingleton('AuthenticateController', AuthenticateController)
@@ -166,4 +177,25 @@ container.registerSingleton(
 container.registerSingleton(
   'DeletePatientBenefitController',
   DeletePatientBenefitController,
+)
+
+container.registerSingleton(
+  'FindAllPatientDependenciesController',
+  FindAllPatientDependenciesController,
+)
+container.registerSingleton(
+  'FindPatientDependencieByCodigoController',
+  FindPatientDependencieByCodigoController,
+)
+container.registerSingleton(
+  'RegisterPatientDependencieController',
+  RegisterPatientDependencieController,
+)
+container.registerSingleton(
+  'UpdatePatientDependencieController',
+  UpdatePatientDependencieController,
+)
+container.registerSingleton(
+  'DeletePatientDependencieController',
+  DeletePatientDependencieController,
 )
