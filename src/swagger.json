@@ -8,5 +8,204 @@
       "name": "Andre Luiz",
       "email": "andre.luiz.itape@gmail.com"
     }
+  },
+  "tags": [
+    {
+      "name": "Autenticação",
+      "description": "Endpoints relacionados à autenticação de usuários"
+    }
+  ],
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  },
+  "paths": {
+    "/authenticate/session": {
+      "post": {
+        "tags": ["Autenticação"],
+        "summary": "Login do usuário",
+        "description": "Autenticação do usuário para acessar o sistema.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "username": {
+                    "type": "string"
+                  },
+                  "password": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "invalidCredentials": {
+                    "summary": "Invalid Credentials",
+                    "value": {
+                      "message": "Invalid Credentials."
+                    }
+                  },
+                  "invalidUser": {
+                    "summary": "User not found",
+                    "value": {
+                      "message": "User not found."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "inactiveUser": {
+                    "summary": "User not active",
+                    "value": {
+                      "message": "User does not have access permission."
+                    }
+                  },
+                  "invalidCredentials": {
+                    "summary": "Invalid Credentials - Token",
+                    "value": {
+                      "message": "User does not have permission to access the application."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/authenticate/find-token": {
+      "get": {
+        "tags": ["Autenticação"],
+        "summary": "Buscar dados do usuário logado",
+        "description": "Recupera informações dos dados do usuário com base no token enviado.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "invalidUser": {
+                    "summary": "User not found",
+                    "value": {
+                      "message": "User not found."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "invalidCredentials": {
+                    "summary": "User does not have access permission",
+                    "value": {
+                      "message": "User does not have access permission."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/authenticate/refresh-token": {
+      "patch": {
+        "tags": ["Autenticação"],
+        "summary": "Refresh token",
+        "description": "Refresh token para acessar o sistema.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "refreshToken": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "invalidUser": {
+                    "summary": "User not found",
+                    "value": {
+                      "message": "User not found."
+                    }
+                  },
+                  "inactiveUser": {
+                    "summary": "User not active",
+                    "value": {
+                      "message": "User does not have access permission."
+                    }
+                  },
+                  "missingRefreshToken": {
+                    "summary": "Refresh token is required",
+                    "value": {
+                      "message": "Refresh token is required."
+                    }
+                  },
+                  "invalidRefreshToken": {
+                    "summary": "Refresh token invalid/expired",
+                    "value": {
+                      "message": "Refresh token is invalid/expired."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
   }
 }
