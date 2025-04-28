@@ -13,6 +13,26 @@
     {
       "name": "Autenticação",
       "description": "Endpoints relacionados à autenticação de usuários"
+    },
+    {
+      "name": "Atividades Fixas",
+      "description": "Endpoints relacionados ao cadastro de atividades fixas"
+    },
+    {
+      "name": "Benefícios Fixos",
+      "description": "Endpoints relacionados ao cadastro de benefícios fixos"
+    },
+    {
+      "name": "Dependências Fixas",
+      "description": "Endpoints relacionados ao cadastro de dependências fixas"
+    },
+    {
+      "name": "Paciente",
+      "description": "Endpoints relacionados ao cadastro de paciente"
+    },
+    {
+      "name": "Paciente - Atividades",
+      "description": "Endpoints relacionados ao cadastro de atividades do paciente"
     }
   ],
   "components": {
@@ -42,7 +62,8 @@
                   "password": {
                     "type": "string"
                   }
-                }
+                },
+                "required": ["username", "password"]
               }
             }
           }
@@ -162,7 +183,8 @@
                   "refreshToken": {
                     "type": "string"
                   }
-                }
+                },
+                "required": ["refreshToken"]
               }
             }
           }
@@ -198,6 +220,1607 @@
                     "summary": "Refresh token invalid/expired",
                     "value": {
                       "message": "Refresh token is invalid/expired."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/fixed-activitie": {
+      "post": {
+        "tags": ["Atividades Fixas"],
+        "summary": "Cadastro de atividades fixas",
+        "description": "Endpoint para registrar uma nova atividade fixa no sistema.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "descricao": {
+                    "type": "string",
+                    "description": "Nome da atividade fixa"
+                  }
+                },
+                "required": ["descricao"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "missingFields": {
+                    "summary": "Validation error",
+                    "value": {
+                      "message": "Validation error."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "invalidToken": {
+                    "summary": "Access token invalid",
+                    "value": {
+                      "message": "Access token invalid."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": ["Atividades Fixas"],
+        "summary": "Atualizar uma atividade fixa",
+        "description": "Endpoint para atualizar uma atividade fixa no sistema.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "codigo": {
+                    "type": "string",
+                    "description": "Código da atividade fixa"
+                  },
+                  "descricao": {
+                    "type": "string",
+                    "description": "Nome da atividade fixa"
+                  }
+                },
+                "required": ["codigo", "descricao"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "missingFields": {
+                    "summary": "Validation error",
+                    "value": {
+                      "message": "Validation error."
+                    }
+                  },
+                  "invalidFixedActivitie": {
+                    "summary": "Fixed Activitie not found",
+                    "value": {
+                      "message": "Fixed Activitie not found."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "invalidToken": {
+                    "summary": "Access token invalid",
+                    "value": {
+                      "message": "Access token invalid."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": ["Atividades Fixas"],
+        "summary": "Obter uma lista das atividades fixas",
+        "description": "Recupera uma lista de todas as atividades fixas.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "invalidToken": {
+                    "summary": "Access token invalid",
+                    "value": {
+                      "message": "Access token invalid."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": ["Atividades Fixas"],
+        "summary": "Deletar atividade fixa pelo código",
+        "description": "Deleta uma atividade fixa pelo código informado.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "codigo",
+            "in": "query",
+            "description": "Código da atividade fixa para deletar",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "invalidFixedActivitie": {
+                    "summary": "Fixed Activitie not found",
+                    "value": {
+                      "message": "Fixed Activitie not found."
+                    }
+                  },
+                  "foreignKeyConstraint": {
+                    "summary": "Foreign key constraint violated",
+                    "value": {
+                      "message": "This record could not be removed because it is being referenced by another record."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "invalidToken": {
+                    "summary": "Access token invalid",
+                    "value": {
+                      "message": "Access token invalid."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/fixed-activitie/codigo": {
+      "get": {
+        "tags": ["Atividades Fixas"],
+        "summary": "Obter atividade fixa pelo código",
+        "description": "Recupera uma atividade fixa pelo código informado.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "codigo",
+            "in": "query",
+            "description": "Código da atividade fixa para filtrar",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "invalidFixedActivitie": {
+                    "summary": "Fixed Activitie not found.",
+                    "value": {
+                      "message": "Fixed Activitie not found."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "invalidToken": {
+                    "summary": "Access token invalid",
+                    "value": {
+                      "message": "Access token invalid."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/fixed-benefit": {
+      "post": {
+        "tags": ["Benefícios Fixos"],
+        "summary": "Cadastro de benefícios fixos",
+        "description": "Endpoint para registrar um novo benefício fixo no sistema.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "descricao": {
+                    "type": "string",
+                    "description": "Nome do benefício fixo"
+                  }
+                },
+                "required": ["descricao"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "missingFields": {
+                    "summary": "Validation error",
+                    "value": {
+                      "message": "Validation error."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "invalidToken": {
+                    "summary": "Access token invalid",
+                    "value": {
+                      "message": "Access token invalid."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": ["Benefícios Fixos"],
+        "summary": "Atualizar um benefício fixo",
+        "description": "Endpoint para atualizar um benefício fixo no sistema.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "codigo": {
+                    "type": "string",
+                    "description": "Código do benefício fixo"
+                  },
+                  "descricao": {
+                    "type": "string",
+                    "description": "Nome do benefício fixo"
+                  }
+                },
+                "required": ["codigo", "descricao"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "missingFields": {
+                    "summary": "Validation error",
+                    "value": {
+                      "message": "Validation error."
+                    }
+                  },
+                  "invalidFixedBenefit": {
+                    "summary": "Fixed Benefit not found",
+                    "value": {
+                      "message": "Fixed Benefit not found."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "invalidToken": {
+                    "summary": "Access token invalid",
+                    "value": {
+                      "message": "Access token invalid."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": ["Benefícios Fixos"],
+        "summary": "Obter uma lista dos benefícios fixos",
+        "description": "Recupera uma lista de todos os benefícios fixos.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "invalidToken": {
+                    "summary": "Access token invalid",
+                    "value": {
+                      "message": "Access token invalid."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": ["Benefícios Fixos"],
+        "summary": "Deletar benefício fixo pelo código",
+        "description": "Deleta um benefício fixo pelo código informado.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "codigo",
+            "in": "query",
+            "description": "Código do benefício fixo para deletar",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "invalidFixedBenefit": {
+                    "summary": "Fixed Benefit not found",
+                    "value": {
+                      "message": "Fixed Benefit not found."
+                    }
+                  },
+                  "foreignKeyConstraint": {
+                    "summary": "Foreign key constraint violated",
+                    "value": {
+                      "message": "This record could not be removed because it is being referenced by another record."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "invalidToken": {
+                    "summary": "Access token invalid",
+                    "value": {
+                      "message": "Access token invalid."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/fixed-benefit/codigo": {
+      "get": {
+        "tags": ["Benefícios Fixos"],
+        "summary": "Obter benefício fixo pelo código",
+        "description": "Recupera um benefício fixo pelo código informado.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "codigo",
+            "in": "query",
+            "description": "Código do benefício fixo para filtrar",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "invalidFixedBenefit": {
+                    "summary": "Fixed Benefit not found",
+                    "value": {
+                      "message": "Fixed Benefit not found."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "invalidToken": {
+                    "summary": "Access token invalid",
+                    "value": {
+                      "message": "Access token invalid."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/fixed-dependencie": {
+      "post": {
+        "tags": ["Dependências Fixas"],
+        "summary": "Cadastro de dependências fixas",
+        "description": "Endpoint para registrar uma nova dependência fixa no sistema.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "descricao": {
+                    "type": "string",
+                    "description": "Nome da dependência fixa"
+                  }
+                },
+                "required": ["descricao"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "missingFields": {
+                    "summary": "Validation error",
+                    "value": {
+                      "message": "Validation error."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "invalidToken": {
+                    "summary": "Access token invalid",
+                    "value": {
+                      "message": "Access token invalid."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": ["Dependências Fixas"],
+        "summary": "Atualizar uma dependência fixa",
+        "description": "Endpoint para atualizar uma dependência fixa no sistema.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "codigo": {
+                    "type": "string",
+                    "description": "Código da dependência fixa"
+                  },
+                  "descricao": {
+                    "type": "string",
+                    "description": "Nome da dependência fixa"
+                  }
+                },
+                "required": ["codigo", "descricao"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "missingFields": {
+                    "summary": "Validation error",
+                    "value": {
+                      "message": "Validation error."
+                    }
+                  },
+                  "invalidFixedDependencie": {
+                    "summary": "Fixed Dependencie not found",
+                    "value": {
+                      "message": "Fixed Dependencie not found."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "invalidToken": {
+                    "summary": "Access token invalid",
+                    "value": {
+                      "message": "Access token invalid."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": ["Dependências Fixas"],
+        "summary": "Obter uma lista das dependências fixas",
+        "description": "Recupera uma lista de todas as dependência fixas.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "invalidToken": {
+                    "summary": "Access token invalid",
+                    "value": {
+                      "message": "Access token invalid."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": ["Dependências Fixas"],
+        "summary": "Deletar dependência fixa pelo código",
+        "description": "Deleta uma dependência fixa pelo código informado.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "codigo",
+            "in": "query",
+            "description": "Código da dependência fixa para deletar",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "invalidFixedDependencie": {
+                    "summary": "Fixed Dependencie not found",
+                    "value": {
+                      "message": "Fixed Dependencie not found."
+                    }
+                  },
+                  "foreignKeyConstraint": {
+                    "summary": "Foreign key constraint violated",
+                    "value": {
+                      "message": "This record could not be removed because it is being referenced by another record."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "invalidToken": {
+                    "summary": "Access token invalid",
+                    "value": {
+                      "message": "Access token invalid."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/fixed-dependencie/codigo": {
+      "get": {
+        "tags": ["Dependências Fixas"],
+        "summary": "Obter dependência fixa pelo código",
+        "description": "Recupera uma dependência fixa pelo código informado.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "codigo",
+            "in": "query",
+            "description": "Código da dependência fixa para filtrar",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "invalidFixedDependencie": {
+                    "summary": "Fixed Dependencie not found",
+                    "value": {
+                      "message": "Fixed Dependencie not found."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "invalidToken": {
+                    "summary": "Access token invalid",
+                    "value": {
+                      "message": "Access token invalid."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/patient": {
+      "post": {
+        "tags": ["Paciente"],
+        "summary": "Cadastro de paciente",
+        "description": "Endpoint para registrar um novo paciente no sistema.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "nome": {
+                    "type": "string",
+                    "description": "Nome do paciente"
+                  },
+                  "idade": {
+                    "type": "integer",
+                    "description": "Idade do paciente"
+                  },
+                  "documento": {
+                    "type": "string",
+                    "description": "Documento do paciente"
+                  },
+                  "data_nascimento": {
+                    "type": "string",
+                    "format": "date",
+                    "description": "Data de nascimento (formato: DD-MM-YYYY)"
+                  },
+                  "sexo": {
+                    "type": "string",
+                    "enum": ["Masculino", "Feminino", "Outro"],
+                    "description": "Sexo do paciente"
+                  },
+                  "estado_civil": {
+                    "type": "string",
+                    "enum": ["Solteiro", "Casado", "Divorciado", "Viuvo", "Outro"],
+                    "description": "Estado civil do paciente"
+                  },
+                  "profissao": {
+                    "type": "string",
+                    "description": "Profissão do paciente"
+                  },
+                  "morador_rua": {
+                    "type": "boolean",
+                    "description": "Se o paciente é morador de rua"
+                  },
+                  "status": {
+                    "type": "string",
+                    "enum": ["Ativo", "Bloqueado"],
+                    "description": "Status do paciente"
+                  },
+                  "cor_olhos": {
+                    "type": "string",
+                    "description": "Cor dos olhos"
+                  },
+                  "cor_cabelo": {
+                    "type": "string",
+                    "description": "Cor do cabelo"
+                  },
+                  "altura": {
+                    "type": "string",
+                    "description": "Altura do paciente (em metros)"
+                  },
+                  "peso": {
+                    "type": "string",
+                    "description": "Peso do paciente (em kg)"
+                  },
+                  "etnia": {
+                    "type": "string",
+                    "description": "Etnia do paciente"
+                  },
+                  "tipo_documento": {
+                    "type": "string",
+                    "enum": ["RG", "CPF"],
+                    "description": "Tipo de documento do paciente"
+                  }
+                },
+                "required": [
+                  "nome",
+                  "idade",
+                  "documento",
+                  "data_nascimento",
+                  "sexo",
+                  "estado_civil",
+                  "status",
+                  "tipo_documento"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "missingFields": {
+                    "summary": "Validation error",
+                    "value": {
+                      "message": "Validation error."
+                    }
+                  },
+                  "invalidDocument": {
+                    "summary": "Document with invalid characters",
+                    "value": {
+                      "message": "The document must contain only numbers !"
+                    }
+                  },
+                  "duplicateDocument": {
+                    "summary": "Document already registered",
+                    "value": {
+                      "message": "The document is already registered in the database!"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "invalidToken": {
+                    "summary": "Access token invalid",
+                    "value": {
+                      "message": "Access token invalid."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": ["Paciente"],
+        "summary": "Atualizar um paciente",
+        "description": "Endpoint para atualizar um paciente no sistema.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "Código do paciente"
+                  },
+                  "nome": {
+                    "type": "string",
+                    "description": "Nome do paciente"
+                  },
+                  "idade": {
+                    "type": "integer",
+                    "description": "Idade do paciente"
+                  },
+                  "documento": {
+                    "type": "string",
+                    "description": "Documento do paciente"
+                  },
+                  "data_nascimento": {
+                    "type": "string",
+                    "format": "date",
+                    "description": "Data de nascimento (formato: DD-MM-YYYY)"
+                  },
+                  "sexo": {
+                    "type": "string",
+                    "enum": ["Masculino", "Feminino", "Outro"],
+                    "description": "Sexo do paciente"
+                  },
+                  "estado_civil": {
+                    "type": "string",
+                    "enum": ["Solteiro", "Casado", "Divorciado", "Viuvo", "Outro"],
+                    "description": "Estado civil do paciente"
+                  },
+                  "profissao": {
+                    "type": "string",
+                    "description": "Profissão do paciente"
+                  },
+                  "morador_rua": {
+                    "type": "boolean",
+                    "description": "Se o paciente é morador de rua"
+                  },
+                  "status": {
+                    "type": "string",
+                    "enum": ["Ativo", "Bloqueado"],
+                    "description": "Status do paciente"
+                  },
+                  "cor_olhos": {
+                    "type": "string",
+                    "description": "Cor dos olhos"
+                  },
+                  "cor_cabelo": {
+                    "type": "string",
+                    "description": "Cor do cabelo"
+                  },
+                  "altura": {
+                    "type": "string",
+                    "description": "Altura do paciente (em metros)"
+                  },
+                  "peso": {
+                    "type": "string",
+                    "description": "Peso do paciente (em kg)"
+                  },
+                  "etnia": {
+                    "type": "string",
+                    "description": "Etnia do paciente"
+                  },
+                  "tipo_documento": {
+                    "type": "string",
+                    "enum": ["RG", "CPF"],
+                    "description": "Tipo de documento do paciente"
+                  }
+                },
+                "required": [
+                  "id",
+                  "nome",
+                  "idade",
+                  "documento",
+                  "data_nascimento",
+                  "sexo",
+                  "estado_civil",
+                  "status",
+                  "tipo_documento"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "missingFields": {
+                    "summary": "Validation error",
+                    "value": {
+                      "message": "Validation error."
+                    }
+                  },
+                  "invalidDocument": {
+                    "summary": "Document with invalid characters",
+                    "value": {
+                      "message": "The document must contain only numbers !"
+                    }
+                  },
+                  "duplicateDocument": {
+                    "summary": "Document already registered",
+                    "value": {
+                      "message": "The document is already registered in the database!"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "invalidToken": {
+                    "summary": "Access token invalid",
+                    "value": {
+                      "message": "Access token invalid."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": ["Paciente"],
+        "summary": "Obter uma lista de pacientes",
+        "description": "Recupera uma lista de todos os pacientes.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "invalidToken": {
+                    "summary": "Access token invalid",
+                    "value": {
+                      "message": "Access token invalid."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": ["Paciente"],
+        "summary": "Deletar paciente pelo id",
+        "description": "Deleta um paciente pelo id informado.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "description": "Id do paciente para deletar",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "invalidPatient": {
+                    "summary": "Patient not found",
+                    "value": {
+                      "message": "Patient not found."
+                    }
+                  },
+                  "foreignKeyConstraint": {
+                    "summary": "Foreign key constraint violated",
+                    "value": {
+                      "message": "This record could not be removed because it is being referenced by another record."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "invalidToken": {
+                    "summary": "Access token invalid",
+                    "value": {
+                      "message": "Access token invalid."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/patient/id": {
+      "get": {
+        "tags": ["Paciente"],
+        "summary": "Obter paciente pelo código",
+        "description": "Recupera um paciente pelo id informado.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "description": "Id do paciente para deletar",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "invalidFixedDependencie": {
+                    "summary": "Patient not found",
+                    "value": {
+                      "message": "Patient not found."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "invalidToken": {
+                    "summary": "Access token invalid",
+                    "value": {
+                      "message": "Access token invalid."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/history-activitie": {
+      "post": {
+        "tags": ["Paciente - Atividades"],
+        "summary": "Cadastro de atividade do paciente",
+        "description": "Endpoint para registrar uma nova atividade do paciente no sistema.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "cadastro_id": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "Id do paciente"
+                  },
+                  "codigo_atividade": {
+                    "type": "string",
+                    "description": "Codigo da atividade fixa"
+                  }
+                },
+                "required": ["cadastro_id, codigo_atividade"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "missingFields": {
+                    "summary": "Validation error",
+                    "value": {
+                      "message": "Validation error."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "invalidToken": {
+                    "summary": "Access token invalid",
+                    "value": {
+                      "message": "Access token invalid."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": ["Paciente - Atividades"],
+        "summary": "Atualizar uma atividade do paciente",
+        "description": "Endpoint para atualizar uma atividade do paciente no sistema.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "Id do cadastro da atividade do paciente"
+                  },
+                  "cadastro_id": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "Id do paciente"
+                  },
+                  "codigo_atividade": {
+                    "type": "string",
+                    "description": "Codigo da atividade fixa"
+                  }
+                },
+                "required": ["id", "cadastro_id, codigo_atividade"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "missingFields": {
+                    "summary": "Validation error",
+                    "value": {
+                      "message": "Validation error."
+                    }
+                  },
+                  "invalidHistoryActivitie": {
+                    "summary": "History Activitie not found",
+                    "value": {
+                      "message": "History Activitie not found."
+                    }
+                  },
+                  "patientNotFound": {
+                    "summary": "Patient not found",
+                    "value": {
+                      "message": "Patient not found."
+                    }
+                  },
+                  "fixedActivitieNotFound": {
+                    "summary": "Fixed Activitie not found",
+                    "value": {
+                      "message": "Fixed Activitie not found."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "invalidToken": {
+                    "summary": "Access token invalid",
+                    "value": {
+                      "message": "Access token invalid."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": ["Paciente - Atividades"],
+        "summary": "Obter uma lista das atividades cadastradas nos pacientes",
+        "description": "Recupera uma lista de todos os registros de atividades cadastrados nos pacientes.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "invalidToken": {
+                    "summary": "Access token invalid",
+                    "value": {
+                      "message": "Access token invalid."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": ["Paciente - Atividades"],
+        "summary": "Deletar atividade do paciente pelo código",
+        "description": "Deleta uma atividade do paciente pelo id informado.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "description": "Id da atividade do paciente para deletar",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "invalidHistoryActivitie": {
+                    "summary": "History Activitie not found",
+                    "value": {
+                      "message": "History Activitie not found."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "invalidToken": {
+                    "summary": "Access token invalid",
+                    "value": {
+                      "message": "Access token invalid."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/history-activitie/id": {
+      "get": {
+        "tags": ["Paciente - Atividades"],
+        "summary": "Obter uma atividade do paciente pelo id",
+        "description": "Recupera uma atividade do paciente pelo id informado.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "description": "Id da atividade do paciente para filtrar",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "invalidHistoryActivitie": {
+                    "summary": "History Activitie not found",
+                    "value": {
+                      "message": "History Activitie not found."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "invalidToken": {
+                    "summary": "Access token invalid",
+                    "value": {
+                      "message": "Access token invalid."
                     }
                   }
                 }
