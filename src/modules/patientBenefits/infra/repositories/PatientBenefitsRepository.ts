@@ -1,5 +1,3 @@
-import { IPatientBenefit } from '@patientBenefits/domain/models/IPatientBenefit'
-import { IPatientBenefitDTO } from '@patientBenefits/domain/models/IPatientBenefitDTO'
 import { IPatientBenefitResponse } from '@patientBenefits/domain/models/IPatientBenefitResponse'
 import { IRegisterPatientBenefit } from '@patientBenefits/domain/models/IRegisterPatientBenefit'
 import { IUpdatePatientBenefit } from '@patientBenefits/domain/models/IUpdatePatientBenefit'
@@ -105,14 +103,33 @@ export class PatientBenefitsRepository implements IPatientBenefitsRepository {
 
   async updatePatientBenefit(
     data: IUpdatePatientBenefit,
-  ): Promise<IPatientBenefitDTO | null> {
+  ): Promise<IPatientBenefitResponse | null> {
     const patientBenefit = await prisma.beneficiospaciente.update({
       where: {
         id: data.id,
       },
       data: data,
     })
-    return patientBenefit
+
+    const cadastro = await prisma.cadastro.findUnique({
+      where: { id: patientBenefit.cadastro_id },
+    })
+
+    const beneficio = await prisma.beneficiosfixos.findUnique({
+      where: { codigo: patientBenefit.codigo_beneficio },
+    })
+
+    return {
+      id: patientBenefit.id,
+      paciente: {
+        id: cadastro?.id ?? 0,
+        nome: cadastro?.nome ?? 'Desconhecido',
+      },
+      beneficio: {
+        codigo: beneficio?.codigo ?? 'Desconhecido',
+        descricao: beneficio?.descricao ?? 'Sem descrição',
+      },
+    }
   }
 
   async deletePatientBenefit(id: number): Promise<void> {

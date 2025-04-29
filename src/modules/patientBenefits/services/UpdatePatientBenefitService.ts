@@ -1,5 +1,5 @@
 import { IFixedBenefitsRepository } from '@fixedBenefits/domain/repositories/IFixedBenefitsRepository'
-import { IPatientBenefitDTO } from '@patientBenefits/domain/models/IPatientBenefitDTO'
+import { IPatientBenefitResponse } from '@patientBenefits/domain/models/IPatientBenefitResponse'
 import { IUpdatePatientBenefit } from '@patientBenefits/domain/models/IUpdatePatientBenefit'
 import { IPatientBenefitsRepository } from '@patientBenefits/domain/repositories/IPatientBenefitsRepository'
 import { IPatientsRepository } from '@patients/domain/repositories/IPatientsRepository'
@@ -23,7 +23,7 @@ export class UpdatePatientBenefitService {
 
   async execute(
     data: IUpdatePatientBenefit,
-  ): Promise<IPatientBenefitDTO | null> {
+  ): Promise<IPatientBenefitResponse | null> {
     const result =
       await this.patientBenefitsRepository.findPatientBenefitByCodigo(data.id)
 

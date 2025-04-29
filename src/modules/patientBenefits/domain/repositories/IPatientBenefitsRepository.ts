@@ -1,5 +1,3 @@
-import { IPatientBenefit } from '../models/IPatientBenefit'
-import { IPatientBenefitDTO } from '../models/IPatientBenefitDTO'
 import { IPatientBenefitResponse } from '../models/IPatientBenefitResponse'
 import { IRegisterPatientBenefit } from '../models/IRegisterPatientBenefit'
 import { IUpdatePatientBenefit } from '../models/IUpdatePatientBenefit'
@@ -14,6 +12,6 @@ export interface IPatientBenefitsRepository {
   ): Promise<IPatientBenefitResponse | null>
   updatePatientBenefit(
     data: IUpdatePatientBenefit,
-  ): Promise<IPatientBenefitDTO | null>
+  ): Promise<IPatientBenefitResponse | null>
   deletePatientBenefit(id: number): Promise<void>
 }
