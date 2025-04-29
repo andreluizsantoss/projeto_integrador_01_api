@@ -6,7 +6,9 @@ import { IUpdateHistoryActivitie } from '../models/IUpdateHistoryActivitie'
 
 export interface IHistoryActivitiesRepository {
   findAllHistoryActivities(): Promise<IHistoryActivitieResponse[]>
-  findHistoryActivitieByCodigo(id: number): Promise<IHistoryActivitie | null>
+  findHistoryActivitieByCodigo(
+    id: number,
+  ): Promise<IHistoryActivitieResponse | null>
   registerHistoryActivitie(
     data: IRegisterHistoryActivitie,
   ): Promise<IHistoryActivitieResponse | null>

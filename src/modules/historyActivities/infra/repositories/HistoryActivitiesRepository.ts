@@ -46,13 +46,37 @@ export class HistoryActivitiesRepository
 
   async findHistoryActivitieByCodigo(
     id: number,
-  ): Promise<IHistoryActivitie | null> {
+  ): Promise<IHistoryActivitieResponse | null> {
     const historyActivitie = await prisma.historicoatividades.findUnique({
       where: {
         id: id,
       },
     })
-    return historyActivitie
+
+    if (!historyActivitie) {
+      return null
+    }
+
+    const cadastro = await prisma.cadastro.findUnique({
+      where: { id: historyActivitie.cadastro_id },
+    })
+
+    const atividade = await prisma.atividadesfixas.findUnique({
+      where: { codigo: historyActivitie.codigo_atividade },
+    })
+
+    return {
+      id: historyActivitie.id,
+      paciente: {
+        id: cadastro?.id ?? 0,
+        nome: cadastro?.nome ?? 'Desconhecido',
+      },
+      atividade: {
+        codigo: atividade?.codigo ?? 'Desconhecido',
+        descricao: atividade?.descricao ?? 'Sem descrição',
+      },
+      data_atendimento: historyActivitie.data_atendimento,
+    }
   }
 
   async registerHistoryActivitie(
