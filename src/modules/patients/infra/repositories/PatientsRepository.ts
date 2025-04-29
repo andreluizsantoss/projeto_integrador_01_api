@@ -5,13 +5,93 @@ import { IPatientsRepository } from '@patients/domain/repositories/IPatientsRepo
 import { prisma } from '@shared/infra/http/lib/prisma'
 
 export class PatientsRepository implements IPatientsRepository {
-  async findAllPatients(): Promise<IPatient[]> {
+  async findAllPatients(): Promise<IPatientDTO[]> {
     const patients = await prisma.cadastro.findMany({
       orderBy: {
         nome: 'asc',
       },
+      include: {
+        beneficiospaciente: {
+          select: {
+            id: true,
+            codigo_beneficio: true,
+            beneficiosfixos: {
+              select: {
+                descricao: true,
+              },
+            },
+          },
+        },
+        dependenciaspaciente: {
+          select: {
+            id: true,
+            codigo_dependencia: true,
+            dependenciasfixas: {
+              select: {
+                descricao: true,
+              },
+            },
+          },
+        },
+        historicoatividades: {
+          select: {
+            id: true,
+            codigo_atividade: true,
+            data_atendimento: true,
+            atividadesfixas: {
+              select: {
+                codigo: true,
+                descricao: true,
+              },
+            },
+          },
+        },
+      },
     })
-    return patients
+
+    const patientDTOs: IPatientDTO[] = patients.map(patient => ({
+      id: patient.id,
+      nome: patient.nome,
+      idade: patient.idade,
+      documento: patient.documento,
+      data_nascimento: patient.data_nascimento,
+      sexo: patient.sexo,
+      estado_civil: patient.estado_civil,
+      profissao: patient.profissao,
+      morador_rua: patient.morador_rua,
+      status: patient.status,
+      cor_olhos: patient.cor_olhos,
+      cor_cabelo: patient.cor_cabelo,
+      altura: patient.altura,
+      peso: patient.peso,
+      etnia: patient.etnia,
+      codigo_usuario: patient.codigo_usuario,
+      tipo_documento: patient.tipo_documento,
+      beneficiospaciente: patient.beneficiospaciente.map(benefit => ({
+        id: benefit.id,
+        beneficio: {
+          codigo: benefit.codigo_beneficio,
+          descricao: benefit.beneficiosfixos?.descricao,
+        },
+      })),
+      dependenciaspaciente: patient.dependenciaspaciente.map(dependency => ({
+        id: dependency.id,
+        dependencia: {
+          codigo: dependency.codigo_dependencia,
+          descricao: dependency.dependenciasfixas?.descricao,
+        },
+      })),
+      historicoatividades: patient.historicoatividades.map(activity => ({
+        id: activity.id,
+        atividade: {
+          codigo: activity.atividadesfixas?.codigo,
+          descricao: activity.atividadesfixas?.descricao,
+        },
+        data_atendimento: activity.data_atendimento,
+      })),
+    }))
+
+    return patientDTOs
   }
 
   async findPatientByCodigo(id: number): Promise<IPatient | null> {
@@ -45,7 +125,7 @@ export class PatientsRepository implements IPatientsRepository {
         tipo_documento: patient.tipo_documento,
       },
     })
-    return result
+    return null
   }
 
   async updatePatient(patient: IPatient): Promise<IPatientDTO | null> {
@@ -71,7 +151,7 @@ export class PatientsRepository implements IPatientsRepository {
         tipo_documento: patient.tipo_documento,
       },
     })
-    return result
+    return null
   }
 
   async deletePatient(id: number): Promise<void> {
