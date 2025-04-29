@@ -69,7 +69,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"descricao\": \"Teste\"\r\n}",
+					"raw": "{\r\n    \"descricao\": \"Atividade Teste\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -116,7 +116,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"codigo\": \"U13\",\r\n    \"descricao\": \"Teste 03 - Update\"\r\n}",
+					"raw": "{\r\n    \"codigo\": \"U15\",\r\n    \"descricao\": \"Atividade - Update\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -162,7 +162,7 @@
 					}
 				],
 				"url": {
-					"raw": "http://localhost:3001/fixed-activitie/codigo?codigo=U09",
+					"raw": "http://localhost:3001/fixed-activitie/codigo?codigo=U15",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -175,7 +175,7 @@
 					"query": [
 						{
 							"key": "codigo",
-							"value": "U09"
+							"value": "U15"
 						}
 					]
 				}
@@ -206,7 +206,7 @@
 					}
 				],
 				"url": {
-					"raw": "http://localhost:3001/fixed-activitie/?codigo=U03",
+					"raw": "http://localhost:3001/fixed-activitie/?codigo=U05",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -219,7 +219,7 @@
 					"query": [
 						{
 							"key": "codigo",
-							"value": "U03"
+							"value": "U05"
 						}
 					]
 				}

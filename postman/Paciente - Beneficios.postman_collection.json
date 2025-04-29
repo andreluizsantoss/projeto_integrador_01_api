@@ -69,7 +69,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"cadastro_id\": \"6\",\r\n    \"codigo_beneficio\": \"B10\"\r\n}",
+					"raw": "{\r\n    \"cadastro_id\": \"1\",\r\n    \"codigo_beneficio\": \"B04\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -162,7 +162,7 @@
 					}
 				],
 				"url": {
-					"raw": "http://localhost:3001/patient-benefit/id?id=1",
+					"raw": "http://localhost:3001/patient-benefit/id?id=2",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -175,7 +175,7 @@
 					"query": [
 						{
 							"key": "id",
-							"value": "1"
+							"value": "2"
 						}
 					]
 				}
