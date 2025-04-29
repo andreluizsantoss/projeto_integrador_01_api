@@ -3,8 +3,8 @@ import { IPatientDTO } from '../models/IPatientDTO'
 import { IRegisterPatient } from '../models/IRegisterPatient'
 
 export interface IPatientsRepository {
-  findAllPatients(): Promise<IPatient[]>
-  findPatientByCodigo(id: number): Promise<IPatient | null>
+  findAllPatients(): Promise<IPatientDTO[]>
+  findPatientByCodigo(id: number): Promise<IPatientDTO | null>
   registerPatient(patient: IRegisterPatient): Promise<IPatientDTO | null>
   updatePatient(patient: IPatient): Promise<IPatientDTO | null>
   deletePatient(id: number): Promise<void>

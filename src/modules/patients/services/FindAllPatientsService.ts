@@ -1,4 +1,4 @@
-import { IPatient } from '@patients/domain/models/IPatient'
+import { IPatientDTO } from '@patients/domain/models/IPatientDTO'
 import { IPatientsRepository } from '@patients/domain/repositories/IPatientsRepository'
 import { inject, injectable } from 'tsyringe'
 
@@ -9,7 +9,7 @@ export class FindAllPatientsService {
     private patientsRepository: IPatientsRepository,
   ) {}
 
-  async execute(): Promise<IPatient[]> {
+  async execute(): Promise<IPatientDTO[]> {
     const result = await this.patientsRepository.findAllPatients()
     return result
   }
