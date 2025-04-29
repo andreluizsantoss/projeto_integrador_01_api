@@ -45,13 +45,36 @@ export class PatientDependenciesRepository
 
   async findPatientDependencieByCodigo(
     id: number,
-  ): Promise<IPatientDependencie | null> {
+  ): Promise<IPatientDependencieResponse | null> {
     const patientDependencie = await prisma.dependenciaspaciente.findUnique({
       where: {
         id: id,
       },
     })
-    return patientDependencie
+
+    if (!patientDependencie) {
+      return null
+    }
+
+    const cadastro = await prisma.cadastro.findUnique({
+      where: { id: patientDependencie.cadastro_id },
+    })
+
+    const dependencia = await prisma.dependenciasfixas.findUnique({
+      where: { codigo: patientDependencie.codigo_dependencia },
+    })
+
+    return {
+      id: patientDependencie.id,
+      paciente: {
+        id: cadastro?.id ?? 0,
+        nome: cadastro?.nome ?? 'Desconhecido',
+      },
+      dependencia: {
+        codigo: dependencia?.codigo ?? 'Desconhecido',
+        descricao: dependencia?.descricao ?? 'Sem descrição',
+      },
+    }
   }
 
   async registerPatientDependencie(

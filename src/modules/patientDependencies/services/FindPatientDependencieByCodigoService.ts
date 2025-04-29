@@ -1,4 +1,4 @@
-import { IPatientDependencie } from '@patientDependencies/domain/models/IPatientDependencie'
+import { IPatientDependencieResponse } from '@patientDependencies/domain/models/IPatientDependencieResponse'
 import { IShowPatientDependencieByCodigo } from '@patientDependencies/domain/models/IShowPatientDependencieByCodigo'
 import { IPatientDependenciesRepository } from '@patientDependencies/domain/repositories/IPatientDependenciesRepository'
 import { PatientDependencieNotFoundError } from '@shared/errors/PatientDependencieNotFoundError'
@@ -13,7 +13,7 @@ export class FindPatientDependencieByCodigoService {
 
   async execute({
     id,
-  }: IShowPatientDependencieByCodigo): Promise<IPatientDependencie | null> {
+  }: IShowPatientDependencieByCodigo): Promise<IPatientDependencieResponse | null> {
     const result =
       await this.patientDependenciesRepository.findPatientDependencieByCodigo(
         id,

@@ -8,7 +8,7 @@ export interface IPatientDependenciesRepository {
   findAllPatientDependencies(): Promise<IPatientDependencieResponse[]>
   findPatientDependencieByCodigo(
     id: number,
-  ): Promise<IPatientDependencie | null>
+  ): Promise<IPatientDependencieResponse | null>
   registerPatientDependencie(
     data: IRegisterPatientDependencie,
   ): Promise<IPatientDependencieDTO | null>
