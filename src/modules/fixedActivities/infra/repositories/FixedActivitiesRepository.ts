@@ -6,7 +6,7 @@ export class FixedActivitiesRepository implements IFixedActivitiesRepository {
   async findAllFixedActivities(): Promise<IFixedActivitie[]> {
     const fixedActivities = await prisma.atividadesfixas.findMany({
       orderBy: {
-        descricao: 'desc',
+        descricao: 'asc',
       },
     })
     return fixedActivities
