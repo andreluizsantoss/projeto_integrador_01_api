@@ -6,6 +6,7 @@ import { IUsersRepository } from '@users/domain/repositories/IUsersRepository'
 import jwtConfig from '@config/auth'
 import { sign } from 'jsonwebtoken'
 import { UserNotPermissionError } from '@shared/errors/UserNotPermissionError'
+import { compare } from 'bcryptjs'
 
 @injectable()
 export class AuthenticateService {
@@ -27,9 +28,14 @@ export class AuthenticateService {
       throw new UserNotPermissionError()
     }
 
-    if (password != user.senha) {
+    const doesPasswordMatches = await compare(password, user.senha!)
+    if (!doesPasswordMatches) {
       throw new InvalidCredentialsError()
     }
+
+    // if (password != user.senha) {
+    //   throw new InvalidCredentialsError()
+    // }
 
     const access_token = sign({}, jwtConfig.jwt.secret, {
       subject: user.id.toString(),
