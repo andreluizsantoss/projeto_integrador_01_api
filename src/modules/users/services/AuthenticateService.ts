@@ -23,7 +23,7 @@ export class AuthenticateService {
       throw new InvalidCredentialsError()
     }
 
-    if (user.status != 'ATIVO') {
+    if (user.status != 'Ativo') {
       throw new UserNotPermissionError()
     }
 

@@ -19,7 +19,7 @@ export class FindByTokenService {
       throw new UserNotFoundError()
     }
 
-    if (user.status != 'ATIVO') {
+    if (user.status != 'Ativo') {
       throw new UserNotPermissionError()
     }
 

@@ -7,10 +7,12 @@ import patientRouter from '@patients/infra/http/routes/PatientRoutes'
 import patientBenefitRouter from '@patientBenefits/infra/http/routes/PatientBenefitRoutes'
 import patientDependencieRouter from '@patientDependencies/infra/http/routes/PatientDependencieRoutes'
 import historyActivitieRouter from '@historyActivities/infra/http/routes/HistoryActivitieRoutes'
+import usersRouter from '@users/infra/http/routes/UsersRoutes'
 
 const routes = Router()
 
 routes.use('/authenticate', authenticateRouter)
+routes.use('/user', usersRouter)
 routes.use('/fixed-activitie', fixedActivitieRouter)
 routes.use('/fixed-benefit', fixedBenefitRouter)
 routes.use('/fixed-dependencie', fixedDependencieRouter)
