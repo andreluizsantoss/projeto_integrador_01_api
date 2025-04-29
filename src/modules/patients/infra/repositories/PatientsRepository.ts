@@ -206,8 +206,88 @@ export class PatientsRepository implements IPatientsRepository {
         etnia: patient.etnia,
         tipo_documento: patient.tipo_documento,
       },
+      include: {
+        beneficiospaciente: {
+          select: {
+            id: true,
+            codigo_beneficio: true,
+            beneficiosfixos: {
+              select: {
+                descricao: true,
+              },
+            },
+          },
+        },
+        dependenciaspaciente: {
+          select: {
+            id: true,
+            codigo_dependencia: true,
+            dependenciasfixas: {
+              select: {
+                descricao: true,
+              },
+            },
+          },
+        },
+        historicoatividades: {
+          select: {
+            id: true,
+            codigo_atividade: true,
+            data_atendimento: true,
+            atividadesfixas: {
+              select: {
+                codigo: true,
+                descricao: true,
+              },
+            },
+          },
+        },
+      },
     })
-    return null
+
+    const patientDTO: IPatientDTO = {
+      id: result.id,
+      nome: result.nome,
+      idade: result.idade,
+      documento: result.documento,
+      data_nascimento: result.data_nascimento,
+      sexo: result.sexo,
+      estado_civil: result.estado_civil,
+      profissao: result.profissao,
+      morador_rua: result.morador_rua,
+      status: result.status,
+      cor_olhos: result.cor_olhos,
+      cor_cabelo: result.cor_cabelo,
+      altura: result.altura,
+      peso: result.peso,
+      etnia: result.etnia,
+      codigo_usuario: result.codigo_usuario,
+      tipo_documento: result.tipo_documento,
+      beneficiospaciente: result.beneficiospaciente.map(benefit => ({
+        id: benefit.id,
+        beneficio: {
+          codigo: benefit.codigo_beneficio,
+          descricao: benefit.beneficiosfixos?.descricao,
+        },
+      })),
+      dependenciaspaciente: result.dependenciaspaciente.map(dependency => ({
+        id: dependency.id,
+        dependencia: {
+          codigo: dependency.codigo_dependencia,
+          descricao: dependency.dependenciasfixas?.descricao,
+        },
+      })),
+      historicoatividades: result.historicoatividades.map(activity => ({
+        id: activity.id,
+        atividade: {
+          codigo: activity.atividadesfixas?.codigo,
+          descricao: activity.atividadesfixas?.descricao,
+        },
+        data_atendimento: activity.data_atendimento,
+      })),
+    }
+
+    return patientDTO
   }
 
   async updatePatient(patient: IPatient): Promise<IPatientDTO | null> {
