@@ -1,5 +1,3 @@
-import { IHistoryActivitie } from '@historyActivities/domain/models/IHistoryActivitie'
-import { IHistoryActivitieDTO } from '@historyActivities/domain/models/IHistoryActivitieDTO'
 import { IHistoryActivitieResponse } from '@historyActivities/domain/models/IHistoryActivitieResponse'
 import { IRegisterHistoryActivitie } from '@historyActivities/domain/models/IRegisterHistoryActivitie'
 import { IUpdateHistoryActivitie } from '@historyActivities/domain/models/IUpdateHistoryActivitie'
