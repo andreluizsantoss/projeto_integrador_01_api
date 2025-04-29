@@ -1,5 +1,5 @@
 import { IFixedActivitiesRepository } from '@fixedActivities/domain/repositories/IFixedActivitiesRepository'
-import { IHistoryActivitieDTO } from '@historyActivities/domain/models/IHistoryActivitieDTO'
+import { IHistoryActivitieResponse } from '@historyActivities/domain/models/IHistoryActivitieResponse'
 import { IUpdateHistoryActivitie } from '@historyActivities/domain/models/IUpdateHistoryActivitie'
 import { IHistoryActivitiesRepository } from '@historyActivities/domain/repositories/IHistoryActivitiesRepository'
 import { IPatientsRepository } from '@patients/domain/repositories/IPatientsRepository'
@@ -23,7 +23,7 @@ export class UpdateHistoryActivitieService {
 
   async execute(
     data: IUpdateHistoryActivitie,
-  ): Promise<IHistoryActivitieDTO | null> {
+  ): Promise<IHistoryActivitieResponse | null> {
     const result =
       await this.historyActivitiesRepository.findHistoryActivitieByCodigo(
         data.id,

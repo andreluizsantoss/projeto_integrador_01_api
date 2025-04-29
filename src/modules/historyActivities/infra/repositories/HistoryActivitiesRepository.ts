@@ -115,7 +115,7 @@ export class HistoryActivitiesRepository
 
   async updateHistoryActivitie(
     data: IUpdateHistoryActivitie,
-  ): Promise<IHistoryActivitieDTO | null> {
+  ): Promise<IHistoryActivitieResponse | null> {
     const now = new Date()
     const historyActivitie = await prisma.historicoatividades.update({
       where: {
@@ -127,7 +127,31 @@ export class HistoryActivitiesRepository
         data_atendimento: now,
       },
     })
-    return historyActivitie
+
+    if (!historyActivitie) {
+      return null
+    }
+
+    const cadastro = await prisma.cadastro.findUnique({
+      where: { id: historyActivitie.cadastro_id },
+    })
+
+    const atividade = await prisma.atividadesfixas.findUnique({
+      where: { codigo: historyActivitie.codigo_atividade },
+    })
+
+    return {
+      id: historyActivitie.id,
+      paciente: {
+        id: cadastro?.id ?? 0,
+        nome: cadastro?.nome ?? 'Desconhecido',
+      },
+      atividade: {
+        codigo: atividade?.codigo ?? 'Desconhecido',
+        descricao: atividade?.descricao ?? 'Sem descrição',
+      },
+      data_atendimento: historyActivitie.data_atendimento,
+    }
   }
 
   async deleteHistoryActivitie(id: number): Promise<void> {

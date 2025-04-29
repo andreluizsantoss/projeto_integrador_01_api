@@ -14,6 +14,6 @@ export interface IHistoryActivitiesRepository {
   ): Promise<IHistoryActivitieResponse | null>
   updateHistoryActivitie(
     data: IUpdateHistoryActivitie,
-  ): Promise<IHistoryActivitieDTO | null>
+  ): Promise<IHistoryActivitieResponse | null>
   deleteHistoryActivitie(id: number): Promise<void>
 }
