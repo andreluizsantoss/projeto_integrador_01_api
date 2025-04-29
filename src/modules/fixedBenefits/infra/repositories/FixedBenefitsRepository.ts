@@ -6,7 +6,7 @@ export class FixedBenefitsRepository implements IFixedBenefitsRepository {
   async findAllFixedBenefits(): Promise<IFixedBenefit[]> {
     const fixedBenefits = await prisma.beneficiosfixos.findMany({
       orderBy: {
-        descricao: 'desc',
+        descricao: 'asc',
       },
     })
     return fixedBenefits
