@@ -75,4 +75,13 @@ export class UsersRepository implements IUsersRepository {
       },
     })
   }
+
+  async findAllUsers(): Promise<IUserDTO[]> {
+    const users = await prisma.usuario.findMany({
+      orderBy: {
+        nome: 'desc',
+      },
+    })
+    return users
+  }
 }

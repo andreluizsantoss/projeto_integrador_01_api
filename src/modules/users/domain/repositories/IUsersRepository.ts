@@ -11,4 +11,5 @@ export interface IUsersRepository {
   updateRefreshToken(user: IUser): Promise<void>
   registerUser(user: IRegisterUser): Promise<void>
   updateUser(user: IUpdateUser): Promise<void>
+  findAllUsers(): Promise<IUserDTO[]>
 }
