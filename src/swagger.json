@@ -111,13 +111,13 @@
               "application/json": {
                 "examples": {
                   "inactiveUser": {
-                    "summary": "User not active",
+                    "summary": "User Not Permission",
                     "value": {
                       "message": "User does not have access permission."
                     }
                   },
                   "invalidCredentials": {
-                    "summary": "Invalid Credentials - Token",
+                    "summary": "User Not Login",
                     "value": {
                       "message": "User does not have permission to access the application."
                     }
