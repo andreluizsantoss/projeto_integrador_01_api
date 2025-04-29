@@ -8,7 +8,7 @@ export class PatientsRepository implements IPatientsRepository {
   async findAllPatients(): Promise<IPatient[]> {
     const patients = await prisma.cadastro.findMany({
       orderBy: {
-        nome: 'desc',
+        nome: 'asc',
       },
     })
     return patients
