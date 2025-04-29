@@ -1,4 +1,3 @@
-import { IHistoryActivitie } from '@historyActivities/domain/models/IHistoryActivitie'
 import { IHistoryActivitieResponse } from '@historyActivities/domain/models/IHistoryActivitieResponse'
 import { IHistoryActivitiesRepository } from '@historyActivities/domain/repositories/IHistoryActivitiesRepository'
 import { inject, injectable } from 'tsyringe'

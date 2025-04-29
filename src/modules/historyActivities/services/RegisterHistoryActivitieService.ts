@@ -1,5 +1,5 @@
 import { IFixedActivitiesRepository } from '@fixedActivities/domain/repositories/IFixedActivitiesRepository'
-import { IHistoryActivitieDTO } from '@historyActivities/domain/models/IHistoryActivitieDTO'
+import { IHistoryActivitieResponse } from '@historyActivities/domain/models/IHistoryActivitieResponse'
 import { IRegisterHistoryActivitie } from '@historyActivities/domain/models/IRegisterHistoryActivitie'
 import { IHistoryActivitiesRepository } from '@historyActivities/domain/repositories/IHistoryActivitiesRepository'
 import { IPatientsRepository } from '@patients/domain/repositories/IPatientsRepository'
@@ -22,7 +22,7 @@ export class RegisterHistoryActivitieService {
 
   async execute(
     data: IRegisterHistoryActivitie,
-  ): Promise<IHistoryActivitieDTO | null> {
+  ): Promise<IHistoryActivitieResponse | null> {
     const result = await this.patientsRepository.findPatientByCodigo(
       data.cadastro_id,
     )

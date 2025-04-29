@@ -1,4 +1,4 @@
-import { IHistoryActivitie } from '@historyActivities/domain/models/IHistoryActivitie'
+import { IHistoryActivitieResponse } from '@historyActivities/domain/models/IHistoryActivitieResponse'
 import { IShowHistoryActivitieByCodigo } from '@historyActivities/domain/models/IShowHistoryActivitieByCodigo'
 import { IHistoryActivitiesRepository } from '@historyActivities/domain/repositories/IHistoryActivitiesRepository'
 import { HistoryActivitieNotFoundError } from '@shared/errors/HistoryActivitieNotFoundError'
@@ -13,7 +13,7 @@ export class FindHistoryActivitieByCodigoService {
 
   async execute({
     id,
-  }: IShowHistoryActivitieByCodigo): Promise<IHistoryActivitie | null> {
+  }: IShowHistoryActivitieByCodigo): Promise<IHistoryActivitieResponse | null> {
     const result =
       await this.historyActivitiesRepository.findHistoryActivitieByCodigo(id)
     if (!result) {
