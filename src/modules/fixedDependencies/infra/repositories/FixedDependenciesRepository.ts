@@ -8,7 +8,7 @@ export class FixedDependenciesRepository
   async findAllFixedDependencies(): Promise<IFixedDependencie[]> {
     const fixedDependencies = await prisma.dependenciasfixas.findMany({
       orderBy: {
-        descricao: 'desc',
+        descricao: 'asc',
       },
     })
     return fixedDependencies
