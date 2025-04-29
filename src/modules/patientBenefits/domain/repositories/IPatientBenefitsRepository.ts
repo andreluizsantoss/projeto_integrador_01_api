@@ -1,10 +1,11 @@
 import { IPatientBenefit } from '../models/IPatientBenefit'
 import { IPatientBenefitDTO } from '../models/IPatientBenefitDTO'
+import { IPatientBenefitResponse } from '../models/IPatientBenefitResponse'
 import { IRegisterPatientBenefit } from '../models/IRegisterPatientBenefit'
 import { IUpdatePatientBenefit } from '../models/IUpdatePatientBenefit'
 
 export interface IPatientBenefitsRepository {
-  findAllPatientBenefits(): Promise<IPatientBenefit[]>
+  findAllPatientBenefits(): Promise<IPatientBenefitResponse[]>
   findPatientBenefitByCodigo(id: number): Promise<IPatientBenefit | null>
   registerPatientBenefit(
     data: IRegisterPatientBenefit,

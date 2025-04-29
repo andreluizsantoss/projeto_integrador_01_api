@@ -1,4 +1,4 @@
-import { IPatientBenefit } from '@patientBenefits/domain/models/IPatientBenefit'
+import { IPatientBenefitResponse } from '@patientBenefits/domain/models/IPatientBenefitResponse'
 import { IPatientBenefitsRepository } from '@patientBenefits/domain/repositories/IPatientBenefitsRepository'
 import { inject, injectable } from 'tsyringe'
 
@@ -9,7 +9,7 @@ export class FindAllPatientBenefitsService {
     private patientBenefitsRepository: IPatientBenefitsRepository,
   ) {}
 
-  async execute(): Promise<IPatientBenefit[]> {
+  async execute(): Promise<IPatientBenefitResponse[]> {
     const result = await this.patientBenefitsRepository.findAllPatientBenefits()
     return result
   }
