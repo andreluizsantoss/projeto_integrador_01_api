@@ -12,4 +12,5 @@ export interface IUsersRepository {
   registerUser(user: IRegisterUser): Promise<void>
   updateUser(user: IUpdateUser): Promise<void>
   findAllUsers(): Promise<IUserDTO[]>
+  deleteUser(id: number): Promise<void>
 }
