@@ -77,11 +77,30 @@ export class PatientBenefitsRepository implements IPatientBenefitsRepository {
 
   async registerPatientBenefit(
     data: IRegisterPatientBenefit,
-  ): Promise<IPatientBenefitDTO | null> {
+  ): Promise<IPatientBenefitResponse | null> {
     const patientBenefit = await prisma.beneficiospaciente.create({
       data: data,
     })
-    return patientBenefit
+
+    const cadastro = await prisma.cadastro.findUnique({
+      where: { id: patientBenefit.cadastro_id },
+    })
+
+    const beneficio = await prisma.beneficiosfixos.findUnique({
+      where: { codigo: patientBenefit.codigo_beneficio },
+    })
+
+    return {
+      id: patientBenefit.id,
+      paciente: {
+        id: cadastro?.id ?? 0,
+        nome: cadastro?.nome ?? 'Desconhecido',
+      },
+      beneficio: {
+        codigo: beneficio?.codigo ?? 'Desconhecido',
+        descricao: beneficio?.descricao ?? 'Sem descrição',
+      },
+    }
   }
 
   async updatePatientBenefit(

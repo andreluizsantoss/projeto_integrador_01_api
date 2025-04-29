@@ -1,5 +1,5 @@
 import { IFixedBenefitsRepository } from '@fixedBenefits/domain/repositories/IFixedBenefitsRepository'
-import { IPatientBenefitDTO } from '@patientBenefits/domain/models/IPatientBenefitDTO'
+import { IPatientBenefitResponse } from '@patientBenefits/domain/models/IPatientBenefitResponse'
 import { IRegisterPatientBenefit } from '@patientBenefits/domain/models/IRegisterPatientBenefit'
 import { IPatientBenefitsRepository } from '@patientBenefits/domain/repositories/IPatientBenefitsRepository'
 import { IPatientsRepository } from '@patients/domain/repositories/IPatientsRepository'
@@ -22,7 +22,7 @@ export class RegisterPatientBenefitService {
 
   async execute(
     data: IRegisterPatientBenefit,
-  ): Promise<IPatientBenefitDTO | null> {
+  ): Promise<IPatientBenefitResponse | null> {
     const result = await this.patientsRepository.findPatientByCodigo(
       data.cadastro_id,
     )
