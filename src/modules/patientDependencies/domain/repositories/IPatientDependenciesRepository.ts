@@ -1,5 +1,3 @@
-import { IPatientDependencie } from '../models/IPatientDependencie'
-import { IPatientDependencieDTO } from '../models/IPatientDependencieDTO'
 import { IPatientDependencieResponse } from '../models/IPatientDependencieResponse'
 import { IRegisterPatientDependencie } from '../models/IRegisterPatientDependencie'
 import { IUpdatePatientDependencie } from '../models/IUpdatePatientDependencie'
@@ -14,6 +12,6 @@ export interface IPatientDependenciesRepository {
   ): Promise<IPatientDependencieResponse | null>
   updatePatientDependencie(
     data: IUpdatePatientDependencie,
-  ): Promise<IPatientDependencieDTO | null>
+  ): Promise<IPatientDependencieResponse | null>
   deletePatientDependencie(id: number): Promise<void>
 }
