@@ -11,7 +11,7 @@ export interface IPatientDependenciesRepository {
   ): Promise<IPatientDependencieResponse | null>
   registerPatientDependencie(
     data: IRegisterPatientDependencie,
-  ): Promise<IPatientDependencieDTO | null>
+  ): Promise<IPatientDependencieResponse | null>
   updatePatientDependencie(
     data: IUpdatePatientDependencie,
   ): Promise<IPatientDependencieDTO | null>

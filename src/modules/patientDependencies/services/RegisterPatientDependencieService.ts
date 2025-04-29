@@ -1,5 +1,5 @@
 import { IFixedDependenciesRepository } from '@fixedDependencies/domain/repositories/IFixedDependenciesRepository'
-import { IPatientDependencieDTO } from '@patientDependencies/domain/models/IPatientDependencieDTO'
+import { IPatientDependencieResponse } from '@patientDependencies/domain/models/IPatientDependencieResponse'
 import { IRegisterPatientDependencie } from '@patientDependencies/domain/models/IRegisterPatientDependencie'
 import { IPatientDependenciesRepository } from '@patientDependencies/domain/repositories/IPatientDependenciesRepository'
 import { IPatientsRepository } from '@patients/domain/repositories/IPatientsRepository'
@@ -22,7 +22,7 @@ export class RegisterPatientDependencieService {
 
   async execute(
     data: IRegisterPatientDependencie,
-  ): Promise<IPatientDependencieDTO | null> {
+  ): Promise<IPatientDependencieResponse | null> {
     const result = await this.patientsRepository.findPatientByCodigo(
       data.cadastro_id,
     )
