@@ -15,7 +15,8 @@ export default class RegisterUserController {
       senha: z
         .string()
         .min(8, 'A senha deve ter no mínimo 8 caracteres')
-        .max(12, 'A senha deve ter no máximo 12 caracteres'),
+        .max(32, 'A senha deve ter no máximo 32 caracteres')
+        .regex(/^\S+$/, 'A senha não pode conter espaços'),
     })
     const { nome, usuario, senha } = bodySchema.parse(request.body)
 

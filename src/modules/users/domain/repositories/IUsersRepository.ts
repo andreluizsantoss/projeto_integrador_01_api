@@ -1,4 +1,5 @@
 import { IRegisterUser } from '../models/IRegisterUser'
+import { IUpdateUser } from '../models/IUpdateUser'
 import { IUser } from '../models/IUser'
 import { IUserDTO } from '../models/IUserDTO'
 
@@ -9,4 +10,5 @@ export interface IUsersRepository {
   autenthicateUser(user: IUser): Promise<void>
   updateRefreshToken(user: IUser): Promise<void>
   registerUser(user: IRegisterUser): Promise<void>
+  updateUser(user: IUpdateUser): Promise<void>
 }

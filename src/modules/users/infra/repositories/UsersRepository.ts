@@ -3,6 +3,7 @@ import { IUsersRepository } from '../../domain/repositories/IUsersRepository'
 import { IUser } from '../../domain/models/IUser'
 import { IUserDTO } from '@users/domain/models/IUserDTO'
 import { IRegisterUser } from '@users/domain/models/IRegisterUser'
+import { IUpdateUser } from '@users/domain/models/IUpdateUser'
 
 export class UsersRepository implements IUsersRepository {
   async findByUsername(username: string) {
@@ -57,6 +58,20 @@ export class UsersRepository implements IUsersRepository {
         usuario: user.usuario,
         senha: user.senha,
         status: 'Ativo',
+      },
+    })
+  }
+
+  async updateUser(user: IUpdateUser): Promise<void> {
+    await prisma.usuario.update({
+      where: {
+        id: user.id,
+      },
+      data: {
+        nome: user.nome,
+        usuario: user.usuario,
+        senha: user.senha,
+        status: user.status,
       },
     })
   }
