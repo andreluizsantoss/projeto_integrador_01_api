@@ -55,6 +55,7 @@ import FindHistoryActivitieByCodigoController from '@historyActivities/infra/htt
 import FindAllHistoryActivitiesController from '@historyActivities/infra/http/controllers/FindAllHistoryActivitiesController'
 import RegisterUserController from '@users/infra/http/controllers/RegisterUserController'
 import UpdateUserController from '@users/infra/http/controllers/UpdateUserController'
+import FindUserByIdController from '@users/infra/http/controllers/FindUserByIdController'
 
 container.registerSingleton<IUsersRepository>(
   'UsersRepository',
@@ -95,6 +96,7 @@ container.registerSingleton('UpdateTokenController', UpdateTokenController)
 
 container.registerSingleton('RegisterUserController', RegisterUserController)
 container.registerSingleton('UpdateUserController', UpdateUserController)
+container.registerSingleton('FindUserByIdController', FindUserByIdController)
 
 container.registerSingleton(
   'FindAllFixedActivitiesController',
