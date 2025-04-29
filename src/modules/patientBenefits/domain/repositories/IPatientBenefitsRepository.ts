@@ -6,7 +6,9 @@ import { IUpdatePatientBenefit } from '../models/IUpdatePatientBenefit'
 
 export interface IPatientBenefitsRepository {
   findAllPatientBenefits(): Promise<IPatientBenefitResponse[]>
-  findPatientBenefitByCodigo(id: number): Promise<IPatientBenefit | null>
+  findPatientBenefitByCodigo(
+    id: number,
+  ): Promise<IPatientBenefitResponse | null>
   registerPatientBenefit(
     data: IRegisterPatientBenefit,
   ): Promise<IPatientBenefitDTO | null>

@@ -1,4 +1,4 @@
-import { IPatientBenefit } from '@patientBenefits/domain/models/IPatientBenefit'
+import { IPatientBenefitResponse } from '@patientBenefits/domain/models/IPatientBenefitResponse'
 import { IShowPatientBenefitByCodigo } from '@patientBenefits/domain/models/IShowPatientBenefitByCodigo'
 import { IPatientBenefitsRepository } from '@patientBenefits/domain/repositories/IPatientBenefitsRepository'
 import { PatientBenefitNotFoundError } from '@shared/errors/PatientBenefitNotFoundError'
@@ -13,7 +13,7 @@ export class FindPatientBenefitByCodigoService {
 
   async execute({
     id,
-  }: IShowPatientBenefitByCodigo): Promise<IPatientBenefit | null> {
+  }: IShowPatientBenefitByCodigo): Promise<IPatientBenefitResponse | null> {
     const result =
       await this.patientBenefitsRepository.findPatientBenefitByCodigo(id)
     if (!result) {
