@@ -9,7 +9,7 @@ export interface IHistoryActivitiesRepository {
   findHistoryActivitieByCodigo(id: number): Promise<IHistoryActivitie | null>
   registerHistoryActivitie(
     data: IRegisterHistoryActivitie,
-  ): Promise<IHistoryActivitieDTO | null>
+  ): Promise<IHistoryActivitieResponse | null>
   updateHistoryActivitie(
     data: IUpdateHistoryActivitie,
   ): Promise<IHistoryActivitieDTO | null>

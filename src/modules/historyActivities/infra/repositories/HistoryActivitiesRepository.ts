@@ -9,15 +9,6 @@ import { prisma } from '@shared/infra/http/lib/prisma'
 export class HistoryActivitiesRepository
   implements IHistoryActivitiesRepository
 {
-  // async findAllHistoryActivities(): Promise<IHistoryActivitie[]> {
-  //   const historyActivities = await prisma.historicoatividades.findMany({
-  //     orderBy: {
-  //       id: 'asc',
-  //     },
-  //   })
-  //   return historyActivities
-  // }
-
   async findAllHistoryActivities(): Promise<IHistoryActivitieResponse[]> {
     const historyActivities = await prisma.historicoatividades.findMany({
       orderBy: {
@@ -66,7 +57,7 @@ export class HistoryActivitiesRepository
 
   async registerHistoryActivitie(
     data: IRegisterHistoryActivitie,
-  ): Promise<IHistoryActivitieDTO | null> {
+  ): Promise<IHistoryActivitieResponse | null> {
     const now = new Date()
     const historyActivitie = await prisma.historicoatividades.create({
       data: {
@@ -75,7 +66,27 @@ export class HistoryActivitiesRepository
         data_atendimento: now,
       },
     })
-    return historyActivitie
+
+    const cadastro = await prisma.cadastro.findUnique({
+      where: { id: historyActivitie.cadastro_id },
+    })
+
+    const atividade = await prisma.atividadesfixas.findUnique({
+      where: { codigo: historyActivitie.codigo_atividade },
+    })
+
+    return {
+      id: historyActivitie.id,
+      paciente: {
+        id: cadastro?.id ?? 0,
+        nome: cadastro?.nome ?? 'Desconhecido',
+      },
+      atividade: {
+        codigo: atividade?.codigo ?? 'Desconhecido',
+        descricao: atividade?.descricao ?? 'Sem descrição',
+      },
+      data_atendimento: historyActivitie.data_atendimento,
+    }
   }
 
   async updateHistoryActivitie(
