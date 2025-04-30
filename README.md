@@ -140,3 +140,116 @@ Essa documentação é útil para desenvolvedores entenderem e integrarem rapida
       /lib                  # Bibliotecas utilitárias reutilizáveis
       /router               # Composição geral de rotas da aplicação
     /middlewares            # Middlewares globais (ex: autenticação, erros)
+
+## Bibliotecas Utilizadas no Projeto
+
+Descrição das bibliotecas utilizadas no projeto, separando-as entre `dependencies` (dependências de produção) e `devDependencies` (dependências de desenvolvimento), com uma breve explicação da função de cada uma.
+
+---
+
+## 📦 Dependencies
+
+Estas bibliotecas são essenciais para a execução da aplicação em ambiente de produção.
+
+- **@prisma/client**
+  Cliente gerado pelo Prisma para interagir com o banco de dados usando TypeScript/JavaScript. É utilizado junto com o ORM Prisma para realizar operações como consultas, inserções e atualizações no banco de dados.
+
+- **bcryptjs**
+  Biblioteca para hash e verificação de senhas. Utiliza o algoritmo bcrypt, que é seguro e amplamente adotado.
+
+- **cors**
+  Middleware para habilitar CORS (Cross-Origin Resource Sharing), permitindo que sua API seja acessada por outras origens (como o frontend hospedado em domínio diferente).
+
+- **dotenv**
+  Carrega variáveis de ambiente de um arquivo `.env` para `process.env`. Facilita a configuração sem precisar codificar dados sensíveis.
+
+- **express**
+  Framework minimalista para criação de servidores web e APIs REST. Facilita a criação de rotas e middleware.
+
+- **express-async-errors**
+  Permite o tratamento de erros em rotas assíncronas no Express sem necessidade de `try/catch` em cada rota.
+
+- **jsonwebtoken**
+  Utilizado para gerar e validar JSON Web Tokens (JWT), geralmente usados para autenticação de usuários.
+
+- **reflect-metadata**
+  Fornece suporte a metadados em TypeScript, necessário para a injeção de dependência com `tsyringe` e decoradores.
+
+- **rimraf**
+  Comando para deletar arquivos/pastas recursivamente. Usado, por exemplo, para limpar a pasta `dist` antes de builds.
+
+- **swagger-ui-express**
+  Middleware para servir documentação Swagger gerada para APIs Express. Gera uma interface web com os endpoints da API.
+
+- **tsyringe**
+  Biblioteca leve de injeção de dependência baseada em decorators, útil para desacoplar componentes e facilitar testes.
+
+- **zod**
+  Biblioteca de validação e parsing de dados com suporte a tipagem estática. Utilizada para validar objetos, entradas de API, etc.
+
+---
+
+## 🛠️ DevDependencies
+
+Essas bibliotecas são utilizadas apenas durante o desenvolvimento e não são necessárias em produção.
+
+- **@babel/cli, @babel/core, @babel/node**
+  Utilizadas para transpilar e executar código TypeScript via Babel. Permitem transformar o código da aplicação para um formato executável pelo Node.js.
+
+- **@babel/plugin-proposal-decorators**
+  Suporte para decoradores no TypeScript com Babel. Necessário para uso de bibliotecas como `tsyringe`.
+
+- **@babel/plugin-transform-class-properties**
+  Transforma propriedades de classe para código compatível com versões antigas do Node.js.
+
+- **@babel/preset-env**
+  Preset Babel que compila o código para uma versão compatível com os ambientes de execução desejados.
+
+- **@babel/preset-typescript**
+  Permite que Babel entenda e converta arquivos `.ts` (TypeScript).
+
+- **@types/** (`bcryptjs`, `cors`, `express`, `jsonwebtoken`, `node`, `swagger-ui-express`)
+  Pacotes de tipagem TypeScript para bibliotecas JavaScript. Permitem autocomplete, validação de tipos e integração com o editor.
+
+- **@typescript-eslint/eslint-plugin**
+  Plugin ESLint para regras específicas do TypeScript.
+
+- **@typescript-eslint/parser**
+  Parser que permite que o ESLint entenda o código TypeScript.
+
+- **babel-plugin-module-resolver**
+  Plugin que permite utilizar aliases em importações ao invés de caminhos relativos longos (ex: `@/modules/...`).
+
+- **babel-plugin-transform-typescript-metadata**
+  Necessário para compatibilidade de metadata com decoradores no Babel + TypeScript.
+
+- **eslint**
+  Ferramenta de linting para análise estática do código a fim de encontrar problemas e garantir boas práticas.
+
+- **eslint-config-prettier**
+  Desativa regras do ESLint que conflitam com Prettier.
+
+- **eslint-plugin-prettier**
+  Integra o Prettier diretamente ao ESLint, permitindo aplicar formatação como regra de linting.
+
+- **prettier**
+  Ferramenta de formatação de código automática.
+
+- **prisma**
+  CLI do Prisma usada durante o desenvolvimento para gerar cliente, realizar migrações, etc.
+
+- **ts-node-dev**
+  Executa projetos TypeScript com reinício automático em mudanças de arquivos (hot reload para dev).
+
+- **tsconfig-paths**
+  Suporte a aliases de caminho definidos em `tsconfig.json` em tempo de execução.
+
+- **typescript**
+  Linguagem baseada em JavaScript com tipagem estática. Compila para JavaScript.
+
+---
+
+## Observações
+
+- As `dependencies` são instaladas em todos os ambientes (produção e desenvolvimento), pois são usadas em tempo de execução.
+- As `devDependencies` são instaladas apenas em ambiente de desenvolvimento, já que são utilizadas em testes, build e ferramentas auxiliares.
