@@ -140,7 +140,3 @@ Essa documentação é útil para desenvolvedores entenderem e integrarem rapida
       /lib                  # Bibliotecas utilitárias reutilizáveis
       /router               # Composição geral de rotas da aplicação
     /middlewares            # Middlewares globais (ex: autenticação, erros)
-
-## Licença
-
-Este projeto é licenciado sob a **MIT License** - veja o arquivo [LICENSE](LICENSE) para mais detalhes.
