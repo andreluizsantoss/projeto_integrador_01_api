@@ -34,7 +34,7 @@ A API do S.O.S. Sorocaba fornece recursos completos para o gerenciamento de aten
   - Tabela referencial com tipos de dependência.
 
 - **Gerenciamento de Usuários**:
-  - Cadastro e autenticação de usuários
+  - Cadastro e autenticação de usuários.
 
 ## Instruções de Instalação
 
@@ -62,19 +62,40 @@ Para rodar este projeto localmente, siga os seguintes passos:
 
 5. Configure o arquivo `.env` com as variáveis de ambiente necessárias, como informações do banco de dados.
 
-6. Execute as correções automáticas de linting para padronizar o código (opcional, mas recomendado):
+6. **Usuário padrão para acesso ao sistema**
+
+   Após a configuração inicial do banco de dados, o sistema já conta com um **usuário administrador padrão** para fins de teste:
+
+   - **Usuário:** `administrador`
+   - **Senha:** `administrador`
+
+7. Execute as correções automáticas de linting para padronizar o código (opcional, mas recomendado):
 
     ```bash
     npm run lint:fix
     ```
 
-7. Para rodar o projeto em modo de desenvolvimento, utilize:
+8. Para rodar o projeto em modo de desenvolvimento (com suporte a TypeScript):
 
     ```bash
     npm run dev
     ```
 
-8. A API estará disponível no endereço `http://localhost:3001` (ou na porta configurada).
+9. Para rodar o projeto já transpilado com Babel (modo de produção):
+
+    1. Gere os arquivos transpilados com o comando:
+
+        ```bash
+        npm run build
+        ```
+
+    2. Inicie o servidor com os arquivos gerados:
+
+        ```bash
+        npm start
+        ```
+
+10. A API estará disponível no endereço `http://localhost:3001` (ou na porta configurada).
 
 ## Documentação da API (Swagger)
 
@@ -86,13 +107,11 @@ Após iniciar o servidor local, a documentação estará disponível no seguinte
 
 Essa documentação é útil para desenvolvedores entenderem e integrarem rapidamente os recursos expostos pela API.
 
-
 ## Estrutura do Projeto
 
 ```bash
 /src
   /@types                   # Tipagens globais (ex: extensão do Express)
-
   /modules                  # Domínios funcionais da aplicação
     /fixedActivities
       /domain
@@ -104,7 +123,6 @@ Essa documentação é útil para desenvolvedores entenderem e integrarem rapida
           /routes           # Definições de rotas
         /repositories       # Implementações dos repositórios
       /services             # Casos de uso (regras de negócio)
-
     /fixedBenefits
     /fixedDependencies
     /historyActivities
@@ -113,7 +131,6 @@ Essa documentação é útil para desenvolvedores entenderem e integrarem rapida
     /patients
     /users
       # Estrutura idêntica ao módulo acima, organizada por domínio
-
   /shared                   # Recursos compartilhados em toda a aplicação
     /config                 # Configurações gerais (ex: database, env)
     /env                    # Gerenciamento de variáveis de ambiente
@@ -124,3 +141,6 @@ Essa documentação é útil para desenvolvedores entenderem e integrarem rapida
       /router               # Composição geral de rotas da aplicação
     /middlewares            # Middlewares globais (ex: autenticação, erros)
 
+## Licença
+
+Este projeto é licenciado sob a **MIT License** - veja o arquivo [LICENSE](LICENSE) para mais detalhes.
