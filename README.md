@@ -140,7 +140,7 @@ Essa documentação é útil para desenvolvedores entenderem e integrarem rapida
       /lib                  # Bibliotecas utilitárias reutilizáveis
       /router               # Composição geral de rotas da aplicação
     /middlewares            # Middlewares globais (ex: autenticação, erros)
-
+```
 ## Bibliotecas Utilizadas no Projeto
 
 Descrição das bibliotecas utilizadas no projeto, separando-as entre `dependencies` (dependências de produção) e `devDependencies` (dependências de desenvolvimento), com uma breve explicação da função de cada uma.
