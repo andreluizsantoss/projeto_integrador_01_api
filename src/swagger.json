@@ -89,6 +89,12 @@
             "content": {
               "application/json": {
                 "examples": {
+                  "missingFields": {
+                    "summary": "Validation error",
+                    "value": {
+                      "message": "Validation error."
+                    }
+                  },
                   "invalidCredentials": {
                     "summary": "Invalid Credentials",
                     "value": {
@@ -148,6 +154,12 @@
             "content": {
               "application/json": {
                 "examples": {
+                  "missingFields": {
+                    "summary": "Validation error",
+                    "value": {
+                      "message": "Validation error."
+                    }
+                  },
                   "invalidUser": {
                     "summary": "User not found",
                     "value": {
@@ -210,6 +222,12 @@
             "content": {
               "application/json": {
                 "examples": {
+                  "missingFields": {
+                    "summary": "Validation error",
+                    "value": {
+                      "message": "Validation error."
+                    }
+                  },
                   "invalidUser": {
                     "summary": "User not found",
                     "value": {
@@ -217,7 +235,7 @@
                     }
                   },
                   "inactiveUser": {
-                    "summary": "User not active",
+                    "summary": "User does not have access permission",
                     "value": {
                       "message": "User does not have access permission."
                     }
@@ -229,7 +247,7 @@
                     }
                   },
                   "invalidRefreshToken": {
-                    "summary": "Refresh token invalid/expired",
+                    "summary": "Refresh token is invalid/expired",
                     "value": {
                       "message": "Refresh token is invalid/expired."
                     }
@@ -244,8 +262,8 @@
     "/user": {
       "post": {
         "tags": ["Usuário"],
-        "summary": "Cadastro de usuários",
-        "description": "Endpoint para registrar um nvo usuário no sistema.",
+        "summary": "Cadastro de usuário",
+        "description": "Endpoint para registrar um novo usuário no sistema.",
         "security": [
           {
             "bearerAuth": []
@@ -467,6 +485,12 @@
             "content": {
               "application/json": {
                 "examples": {
+                  "missingFields": {
+                    "summary": "Validation error",
+                    "value": {
+                      "message": "Validation error."
+                    }
+                  },
                   "invalidUser": {
                     "summary": "User not found",
                     "value": {
@@ -509,7 +533,7 @@
           {
             "name": "id",
             "in": "query",
-            "description": "Id fo usuário para filtrar",
+            "description": "Id fo usuário para buscar",
             "required": true,
             "schema": {
               "type": "number"
@@ -525,6 +549,12 @@
             "content": {
               "application/json": {
                 "examples": {
+                  "missingFields": {
+                    "summary": "Validation error",
+                    "value": {
+                      "message": "Validation error."
+                    }
+                  },
                   "invalidUser": {
                     "summary": "User not found",
                     "value": {
@@ -556,7 +586,7 @@
     "/fixed-activitie": {
       "post": {
         "tags": ["Atividades Fixas"],
-        "summary": "Cadastro de atividades fixas",
+        "summary": "Cadastro de atividade fixa",
         "description": "Endpoint para registrar uma nova atividade fixa no sistema.",
         "security": [
           {
@@ -571,7 +601,7 @@
                 "properties": {
                   "descricao": {
                     "type": "string",
-                    "description": "Nome da atividade fixa"
+                    "description": "Descrição da atividade fixa"
                   }
                 },
                 "required": ["descricao"]
@@ -636,7 +666,7 @@
                   },
                   "descricao": {
                     "type": "string",
-                    "description": "Nome da atividade fixa"
+                    "description": "Descrição da atividade fixa"
                   }
                 },
                 "required": ["codigo", "descricao"]
@@ -745,6 +775,12 @@
             "content": {
               "application/json": {
                 "examples": {
+                  "missingFields": {
+                    "summary": "Validation error",
+                    "value": {
+                      "message": "Validation error."
+                    }
+                  },
                   "invalidFixedActivitie": {
                     "summary": "Fixed Activitie not found",
                     "value": {
@@ -809,8 +845,14 @@
             "content": {
               "application/json": {
                 "examples": {
+                  "missingFields": {
+                    "summary": "Validation error",
+                    "value": {
+                      "message": "Validation error."
+                    }
+                  },
                   "invalidFixedActivitie": {
-                    "summary": "Fixed Activitie not found.",
+                    "summary": "Fixed Activitie not found",
                     "value": {
                       "message": "Fixed Activitie not found."
                     }
@@ -840,7 +882,7 @@
     "/fixed-benefit": {
       "post": {
         "tags": ["Benefícios Fixos"],
-        "summary": "Cadastro de benefícios fixos",
+        "summary": "Cadastro de benefício fixo",
         "description": "Endpoint para registrar um novo benefício fixo no sistema.",
         "security": [
           {
@@ -855,7 +897,7 @@
                 "properties": {
                   "descricao": {
                     "type": "string",
-                    "description": "Nome do benefício fixo"
+                    "description": "Descrição do benefício fixo"
                   }
                 },
                 "required": ["descricao"]
@@ -920,7 +962,7 @@
                   },
                   "descricao": {
                     "type": "string",
-                    "description": "Nome do benefício fixo"
+                    "description": "Descrição do benefício fixo"
                   }
                 },
                 "required": ["codigo", "descricao"]
@@ -1029,6 +1071,12 @@
             "content": {
               "application/json": {
                 "examples": {
+                  "missingFields": {
+                    "summary": "Validation error",
+                    "value": {
+                      "message": "Validation error."
+                    }
+                  },
                   "invalidFixedBenefit": {
                     "summary": "Fixed Benefit not found",
                     "value": {
@@ -1077,7 +1125,7 @@
           {
             "name": "codigo",
             "in": "query",
-            "description": "Código do benefício fixo para filtrar",
+            "description": "Código do benefício fixo para buscar",
             "required": true,
             "schema": {
               "type": "string"
@@ -1093,6 +1141,12 @@
             "content": {
               "application/json": {
                 "examples": {
+                  "missingFields": {
+                    "summary": "Validation error",
+                    "value": {
+                      "message": "Validation error."
+                    }
+                  },
                   "invalidFixedBenefit": {
                     "summary": "Fixed Benefit not found",
                     "value": {
@@ -1124,7 +1178,7 @@
     "/fixed-dependencie": {
       "post": {
         "tags": ["Dependências Fixas"],
-        "summary": "Cadastro de dependências fixas",
+        "summary": "Cadastro de dependência fixa",
         "description": "Endpoint para registrar uma nova dependência fixa no sistema.",
         "security": [
           {
@@ -1139,7 +1193,7 @@
                 "properties": {
                   "descricao": {
                     "type": "string",
-                    "description": "Nome da dependência fixa"
+                    "description": "Descrição da dependência fixa"
                   }
                 },
                 "required": ["descricao"]
@@ -1204,7 +1258,7 @@
                   },
                   "descricao": {
                     "type": "string",
-                    "description": "Nome da dependência fixa"
+                    "description": "Descrição da dependência fixa"
                   }
                 },
                 "required": ["codigo", "descricao"]
@@ -1313,6 +1367,12 @@
             "content": {
               "application/json": {
                 "examples": {
+                  "missingFields": {
+                    "summary": "Validation error",
+                    "value": {
+                      "message": "Validation error."
+                    }
+                  },
                   "invalidFixedDependencie": {
                     "summary": "Fixed Dependencie not found",
                     "value": {
@@ -1361,7 +1421,7 @@
           {
             "name": "codigo",
             "in": "query",
-            "description": "Código da dependência fixa para filtrar",
+            "description": "Código da dependência fixa para buscar",
             "required": true,
             "schema": {
               "type": "string"
@@ -1377,6 +1437,12 @@
             "content": {
               "application/json": {
                 "examples": {
+                  "missingFields": {
+                    "summary": "Validation error",
+                    "value": {
+                      "message": "Validation error."
+                    }
+                  },
                   "invalidFixedDependencie": {
                     "summary": "Fixed Dependencie not found",
                     "value": {
@@ -1525,7 +1591,7 @@
                   "duplicateDocument": {
                     "summary": "Document already registered",
                     "value": {
-                      "message": "The document is already registered in the database!"
+                      "message": "The document is already registered in the database !"
                     }
                   }
                 }
@@ -1567,7 +1633,7 @@
                   "id": {
                     "type": "integer",
                     "format": "int32",
-                    "description": "Código do paciente"
+                    "description": "Id do paciente"
                   },
                   "nome": {
                     "type": "string",
@@ -1674,7 +1740,13 @@
                   "duplicateDocument": {
                     "summary": "Document already registered",
                     "value": {
-                      "message": "The document is already registered in the database!"
+                      "message": "The document is already registered in the database !"
+                    }
+                  },
+                  "invalidPatient": {
+                    "summary": "Patient not found",
+                    "value": {
+                      "message": "Patient not found."
                     }
                   }
                 }
@@ -1758,6 +1830,12 @@
             "content": {
               "application/json": {
                 "examples": {
+                  "missingFields": {
+                    "summary": "Validation error",
+                    "value": {
+                      "message": "Validation error."
+                    }
+                  },
                   "invalidPatient": {
                     "summary": "Patient not found",
                     "value": {
@@ -1795,7 +1873,7 @@
     "/patient/id": {
       "get": {
         "tags": ["Paciente"],
-        "summary": "Obter paciente pelo código",
+        "summary": "Obter paciente pelo id",
         "description": "Recupera um paciente pelo id informado.",
         "security": [
           {
@@ -1806,7 +1884,7 @@
           {
             "name": "id",
             "in": "query",
-            "description": "Id do paciente para deletar",
+            "description": "Id do paciente para buscar",
             "required": true,
             "schema": {
               "type": "integer",
@@ -1823,7 +1901,13 @@
             "content": {
               "application/json": {
                 "examples": {
-                  "invalidFixedDependencie": {
+                  "missingFields": {
+                    "summary": "Validation error",
+                    "value": {
+                      "message": "Validation error."
+                    }
+                  },
+                  "invalidPatient": {
                     "summary": "Patient not found",
                     "value": {
                       "message": "Patient not found."
@@ -1854,8 +1938,8 @@
     "/history-activitie": {
       "post": {
         "tags": ["Paciente - Atividades"],
-        "summary": "Cadastro de atividade do paciente",
-        "description": "Endpoint para registrar uma nova atividade do paciente no sistema.",
+        "summary": "Cadastro de atividade fixa do paciente",
+        "description": "Endpoint para registrar uma nova atividade fixa do paciente no sistema.",
         "security": [
           {
             "bearerAuth": []
@@ -1926,8 +2010,8 @@
       },
       "put": {
         "tags": ["Paciente - Atividades"],
-        "summary": "Atualizar uma atividade do paciente",
-        "description": "Endpoint para atualizar uma atividade do paciente no sistema.",
+        "summary": "Atualizar uma atividade fixa do paciente",
+        "description": "Endpoint para atualizar uma atividade fixa do paciente no sistema.",
         "security": [
           {
             "bearerAuth": []
@@ -1942,7 +2026,7 @@
                   "id": {
                     "type": "integer",
                     "format": "int32",
-                    "description": "Id do cadastro da atividade do paciente"
+                    "description": "Id do cadastro da atividade fixa do paciente"
                   },
                   "cadastro_id": {
                     "type": "integer",
@@ -2015,8 +2099,8 @@
       },
       "get": {
         "tags": ["Paciente - Atividades"],
-        "summary": "Obter uma lista das atividades cadastradas nos pacientes",
-        "description": "Recupera uma lista de todos os registros de atividades cadastrados nos pacientes.",
+        "summary": "Obter uma lista das atividades fixas cadastradas nos pacientes",
+        "description": "Recupera uma lista de todos os registros de atividades fixas cadastradas nos pacientes.",
         "security": [
           {
             "bearerAuth": []
@@ -2045,8 +2129,8 @@
       },
       "delete": {
         "tags": ["Paciente - Atividades"],
-        "summary": "Deletar atividade do paciente pelo código",
-        "description": "Deleta uma atividade do paciente pelo id informado.",
+        "summary": "Deletar atividade fixa do paciente pelo id",
+        "description": "Deleta uma atividade fixa do paciente pelo id informado.",
         "security": [
           {
             "bearerAuth": []
@@ -2056,7 +2140,7 @@
           {
             "name": "id",
             "in": "query",
-            "description": "Id da atividade do paciente para deletar",
+            "description": "Id da atividade fixa do paciente para deletar",
             "required": true,
             "schema": {
               "type": "integer",
@@ -2073,6 +2157,12 @@
             "content": {
               "application/json": {
                 "examples": {
+                  "missingFields": {
+                    "summary": "Validation error",
+                    "value": {
+                      "message": "Validation error."
+                    }
+                  },
                   "invalidHistoryActivitie": {
                     "summary": "History Activitie not found",
                     "value": {
@@ -2104,8 +2194,8 @@
     "/history-activitie/id": {
       "get": {
         "tags": ["Paciente - Atividades"],
-        "summary": "Obter uma atividade do paciente pelo id",
-        "description": "Recupera uma atividade do paciente pelo id informado.",
+        "summary": "Obter uma atividade fixa do paciente pelo id",
+        "description": "Recupera uma atividade fixa do paciente pelo id informado.",
         "security": [
           {
             "bearerAuth": []
@@ -2115,7 +2205,7 @@
           {
             "name": "id",
             "in": "query",
-            "description": "Id da atividade do paciente para filtrar",
+            "description": "Id da atividade do paciente para buscar",
             "required": true,
             "schema": {
               "type": "integer",
@@ -2132,6 +2222,12 @@
             "content": {
               "application/json": {
                 "examples": {
+                  "missingFields": {
+                    "summary": "Validation error",
+                    "value": {
+                      "message": "Validation error."
+                    }
+                  },
                   "invalidHistoryActivitie": {
                     "summary": "History Activitie not found",
                     "value": {
@@ -2163,8 +2259,8 @@
     "/patient-benefit": {
       "post": {
         "tags": ["Paciente - Benefícios"],
-        "summary": "Cadastro de benefício do paciente",
-        "description": "Endpoint para registrar uma novo benefício do paciente no sistema.",
+        "summary": "Cadastro de benefício fixo do paciente",
+        "description": "Endpoint para registrar uma novo benefício fixo do paciente no sistema.",
         "security": [
           {
             "bearerAuth": []
@@ -2206,6 +2302,12 @@
                       "message": "Validation error."
                     }
                   },
+                  "invalidPatient": {
+                    "summary": "Patient not found",
+                    "value": {
+                      "message": "Patient not found."
+                    }
+                  },
                   "invalidFixedBenefit": {
                     "summary": "Fixed Benefit not found",
                     "value": {
@@ -2235,8 +2337,8 @@
       },
       "put": {
         "tags": ["Paciente - Benefícios"],
-        "summary": "Atualizar um benefício do paciente",
-        "description": "Endpoint para atualizar um benefício do paciente no sistema.",
+        "summary": "Atualizar um benefício fixo do paciente",
+        "description": "Endpoint para atualizar um benefício fixo do paciente no sistema.",
         "security": [
           {
             "bearerAuth": []
@@ -2324,8 +2426,8 @@
       },
       "get": {
         "tags": ["Paciente - Benefícios"],
-        "summary": "Obter uma lista dos benefícios cadastrados nos pacientes",
-        "description": "Recupera uma lista de todos os registros de benefícios cadastrados nos pacientes.",
+        "summary": "Obter uma lista dos benefícios fixos cadastrados nos pacientes",
+        "description": "Recupera uma lista de todos os registros de benefícios fixos cadastrados nos pacientes.",
         "security": [
           {
             "bearerAuth": []
@@ -2354,8 +2456,8 @@
       },
       "delete": {
         "tags": ["Paciente - Benefícios"],
-        "summary": "Deletar benefício do paciente pelo código",
-        "description": "Deleta um benefício do paciente pelo id informado.",
+        "summary": "Deletar benefício fixo do paciente pelo id",
+        "description": "Deleta um benefício fixo do paciente pelo id informado.",
         "security": [
           {
             "bearerAuth": []
@@ -2382,6 +2484,12 @@
             "content": {
               "application/json": {
                 "examples": {
+                  "missingFields": {
+                    "summary": "Validation error",
+                    "value": {
+                      "message": "Validation error."
+                    }
+                  },
                   "invalidPatientBenefit": {
                     "summary": "Patient benefit not found",
                     "value": {
@@ -2413,8 +2521,8 @@
     "/patient-benefit/id": {
       "get": {
         "tags": ["Paciente - Benefícios"],
-        "summary": "Obter um benefício do paciente pelo id",
-        "description": "Recupera um benefício do paciente pelo id informado.",
+        "summary": "Obter um benefício fixo do paciente pelo id",
+        "description": "Recupera um benefício fixo do paciente pelo id informado.",
         "security": [
           {
             "bearerAuth": []
@@ -2424,7 +2532,7 @@
           {
             "name": "id",
             "in": "query",
-            "description": "Id do benefício do paciente para filtrar",
+            "description": "Id do benefício fixo do paciente para buscar",
             "required": true,
             "schema": {
               "type": "integer",
@@ -2441,6 +2549,12 @@
             "content": {
               "application/json": {
                 "examples": {
+                  "missingFields": {
+                    "summary": "Validation error",
+                    "value": {
+                      "message": "Validation error."
+                    }
+                  },
                   "invalidPatientBenefit": {
                     "summary": "Patient benefit not found",
                     "value": {
@@ -2469,15 +2583,11 @@
         }
       }
     },
-
-
-
-
     "/patient-dependencie": {
       "post": {
         "tags": ["Paciente - Dependências"],
-        "summary": "Cadastro de dependência do paciente",
-        "description": "Endpoint para registrar uma nova dependência do paciente no sistema.",
+        "summary": "Cadastro de dependência fixa do paciente",
+        "description": "Endpoint para registrar uma nova dependência fixa do paciente no sistema.",
         "security": [
           {
             "bearerAuth": []
@@ -2548,8 +2658,8 @@
       },
       "put": {
         "tags": ["Paciente - Dependências"],
-        "summary": "Atualizar uma dependência do paciente",
-        "description": "Endpoint para atualizar uma dependência do paciente no sistema.",
+        "summary": "Atualizar uma dependência fixa do paciente",
+        "description": "Endpoint para atualizar uma dependência fixa do paciente no sistema.",
         "security": [
           {
             "bearerAuth": []
@@ -2564,7 +2674,7 @@
                   "id": {
                     "type": "integer",
                     "format": "int32",
-                    "description": "Id do cadastro da dependência do paciente"
+                    "description": "Id do cadastro da dependência fixa do paciente"
                   },
                   "cadastro_id": {
                     "type": "integer",
@@ -2637,8 +2747,8 @@
       },
       "get": {
         "tags": ["Paciente - Dependências"],
-        "summary": "Obter uma lista das dependências cadastradas nos pacientes",
-        "description": "Recupera uma lista de todos os registros de dependências cadastradas nos pacientes.",
+        "summary": "Obter uma lista das dependências fixas cadastradas nos pacientes",
+        "description": "Recupera uma lista de todos os registros de dependências fixas cadastradas nos pacientes.",
         "security": [
           {
             "bearerAuth": []
@@ -2667,8 +2777,8 @@
       },
       "delete": {
         "tags": ["Paciente - Dependências"],
-        "summary": "Deletar dependência do paciente pelo código",
-        "description": "Deleta uma dependência do paciente pelo id informado.",
+        "summary": "Deletar dependência fixa do paciente pelo id",
+        "description": "Deleta uma dependência fixa do paciente pelo id informado.",
         "security": [
           {
             "bearerAuth": []
@@ -2695,6 +2805,12 @@
             "content": {
               "application/json": {
                 "examples": {
+                  "missingFields": {
+                    "summary": "Validation error",
+                    "value": {
+                      "message": "Validation error."
+                    }
+                  },
                   "invalidPatientDependencie": {
                     "summary": "Patient dependencie not found",
                     "value": {
@@ -2726,8 +2842,8 @@
     "/patient-dependencie/id": {
       "get": {
         "tags": ["Paciente - Dependências" ],
-        "summary": "Obter uma dependência do paciente pelo id",
-        "description": "Recupera uma dependência do paciente pelo id informado.",
+        "summary": "Obter uma dependência fixa do paciente pelo id",
+        "description": "Recupera uma dependência fixa do paciente pelo id informado.",
         "security": [
           {
             "bearerAuth": []
@@ -2737,7 +2853,7 @@
           {
             "name": "id",
             "in": "query",
-            "description": "Id da dependência do paciente para filtrar",
+            "description": "Id da dependência do paciente para buscar",
             "required": true,
             "schema": {
               "type": "integer",
@@ -2754,6 +2870,12 @@
             "content": {
               "application/json": {
                 "examples": {
+                  "missingFields": {
+                    "summary": "Validation error",
+                    "value": {
+                      "message": "Validation error."
+                    }
+                  },
                   "invalidPatientDependencie": {
                     "summary": "Patient dependencie not found",
                     "value": {

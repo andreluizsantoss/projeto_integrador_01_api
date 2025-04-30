@@ -115,7 +115,7 @@ export default class UpdatePatientController {
         target?.includes('documento')
       ) {
         return response.status(400).send({
-          message: 'The document is already registered in the database!',
+          message: 'The document is already registered in the database !',
         })
       }
       if (err instanceof PatientNotFoundError) {

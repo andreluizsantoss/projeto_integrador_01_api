@@ -112,7 +112,7 @@ export default class RegisterPatientController {
         target?.includes('documento')
       ) {
         return response.status(400).send({
-          message: 'The document is already registered in the database!',
+          message: 'The document is already registered in the database !',
         })
       }
       throw err
