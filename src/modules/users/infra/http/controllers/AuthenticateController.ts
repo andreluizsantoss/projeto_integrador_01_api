@@ -14,7 +14,11 @@ export default class AuthenticateController {
   ): Promise<Response> {
     const bodySchema = z.object({
       username: z.string(),
-      password: z.string().min(8),
+      password: z
+        .string()
+        .min(8, 'Password must be at least 8 characters long.')
+        .max(32, 'Password must be a maximum of 32 characters long.')
+        .regex(/^\S+$/, 'Password cannot contain spaces.'),
     })
 
     const { username, password } = bodySchema.parse(request.body)

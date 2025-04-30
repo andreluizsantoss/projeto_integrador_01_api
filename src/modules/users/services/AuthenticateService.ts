@@ -33,10 +33,6 @@ export class AuthenticateService {
       throw new InvalidCredentialsError()
     }
 
-    // if (password != user.senha) {
-    //   throw new InvalidCredentialsError()
-    // }
-
     const access_token = sign({}, jwtConfig.jwt.secret, {
       subject: user.id.toString(),
       expiresIn: jwtConfig.jwt.expiresIn,

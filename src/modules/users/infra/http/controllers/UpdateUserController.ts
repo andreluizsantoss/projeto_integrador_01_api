@@ -15,9 +15,9 @@ export default class UpdateUserController {
       usuario: z.string(),
       senha: z
         .string()
-        .min(8, 'A senha deve ter no mínimo 8 caracteres')
-        .max(32, 'A senha deve ter no máximo 32 caracteres')
-        .regex(/^\S+$/, 'A senha não pode conter espaços'),
+        .min(8, 'Password must be at least 8 characters long.')
+        .max(32, 'Password must be a maximum of 32 characters long.')
+        .regex(/^\S+$/, 'Password cannot contain spaces.'),
       status: z.enum(
         Object.values(cadastro_status) as [
           cadastro_status,
