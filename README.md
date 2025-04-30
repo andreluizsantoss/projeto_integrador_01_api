@@ -15,10 +15,26 @@ Este projeto é um **Projeto Integrador I** do **Curso de Engenharia da Computa�
 
 ## Funcionalidades da API
 
-- Cadastro de usuários (administração, atendentes, médicos, etc.).
-- Registro e gerenciamento de chamados de emergência.
-- Acompanhamento do status dos atendimentos e chamadas.
-- Relatórios gerenciais para análise de dados de atendimento.
+A API do S.O.S. Sorocaba fornece recursos completos para o gerenciamento de atendimentos de emergência e dados relacionados. As principais funcionalidades incluem:
+
+- **Gerenciamento de Pacientes**:
+  - Cadastro, edição, consulta e listagem de pacientes atendidos.
+  - Registro de informações como idade, sexo, profissão, condição de morador de rua, etnia, dados físicos e tipo de documento.
+
+- **Histórico de Atendimentos**:
+  - Registro de atividades realizadas com data de atendimento.
+  - Integração com tabela de atividades fixas para padronização.
+
+- **Gerenciamento de Benefícios**:
+  - Associação de benefícios recebidos por pacientes.
+  - Tabela referencial com descrição dos benefícios.
+
+- **Gerenciamento de Dependências**:
+  - Registro de dependências associadas a pacientes.
+  - Tabela referencial com tipos de dependência.
+
+- **Gerenciamento de Usuários**:
+  - Cadastro e autenticação de usuários
 
 ## Instruções de Instalação
 
@@ -46,34 +62,65 @@ Para rodar este projeto localmente, siga os seguintes passos:
 
 5. Configure o arquivo `.env` com as variáveis de ambiente necessárias, como informações do banco de dados.
 
-6. Para rodar o projeto em modo de desenvolvimento, utilize:
+6. Execute as correções automáticas de linting para padronizar o código (opcional, mas recomendado):
+
+    ```bash
+    npm run lint:fix
+    ```
+
+7. Para rodar o projeto em modo de desenvolvimento, utilize:
 
     ```bash
     npm run dev
     ```
 
-7. A API estará disponível no endereço `http://localhost:3000` (ou na porta configurada).
+8. A API estará disponível no endereço `http://localhost:3001` (ou na porta configurada).
+
+## Documentação da API (Swagger)
+
+A API conta com uma documentação interativa utilizando **Swagger**, o que facilita a exploração dos endpoints disponíveis, visualização dos parâmetros esperados, respostas possíveis e testes diretos pela interface web.
+
+Após iniciar o servidor local, a documentação estará disponível no seguinte endereço:
+
+[http://localhost:3001/docs](http://localhost:3001/docs)
+
+Essa documentação é útil para desenvolvedores entenderem e integrarem rapidamente os recursos expostos pela API.
+
 
 ## Estrutura do Projeto
 
 ```bash
 /src
-  /controllers      # Lógica das rotas
-  /models           # Definições do banco de dados
-  /routes           # Definições das rotas da API
-  /services         # Lógica de negócio
-  /utils            # Funções utilitárias
-```
+  /@types                   # Tipagens globais (ex: extensão do Express)
 
-## Contribuição
+  /modules                  # Domínios funcionais da aplicação
+    /fixedActivities
+      /domain
+        /models             # Modelos de domínio (entidades)
+        /repositories       # Interfaces dos repositórios
+      /infra
+        /http
+          /controllers      # Lógica de controle das requisições
+          /routes           # Definições de rotas
+        /repositories       # Implementações dos repositórios
+      /services             # Casos de uso (regras de negócio)
 
-1. Faça um fork deste repositório.
-2. Crie uma branch com sua feature: `git checkout -b minha-feature`
-3. Faça as mudanças e commit: `git commit -m 'Adiciona nova funcionalidade'`
-4. Faça push para a branch: `git push origin minha-feature`
-5. Abra um Pull Request explicando as alterações.
+    /fixedBenefits
+    /fixedDependencies
+    /historyActivities
+    /patientBenefits
+    /patientDependencies
+    /patients
+    /users
+      # Estrutura idêntica ao módulo acima, organizada por domínio
 
-## Licença
+  /shared                   # Recursos compartilhados em toda a aplicação
+    /config                 # Configurações gerais (ex: database, env)
+    /env                    # Gerenciamento de variáveis de ambiente
+    /errors                 # Definições de erros personalizados
+    /infra
+      /container            # Injeção de dependência (ex: tsyringe)
+      /lib                  # Bibliotecas utilitárias reutilizáveis
+      /router               # Composição geral de rotas da aplicação
+    /middlewares            # Middlewares globais (ex: autenticação, erros)
 
-Este projeto é licenciado sob a **MIT License** - veja o arquivo [LICENSE](LICENSE) para mais detalhes.
->>>>>>> 7b78b9de0ce45f0f4a4d549408135d0e120aaee3
