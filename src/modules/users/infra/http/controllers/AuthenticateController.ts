@@ -13,22 +13,22 @@ export default class AuthenticateController {
     response: Response,
   ): Promise<Response> {
     const bodySchema = z.object({
-      username: z.string(),
-      password: z
+      usuario: z.string(),
+      senha: z
         .string()
         .min(8, 'Password must be at least 8 characters long.')
         .max(32, 'Password must be a maximum of 32 characters long.')
         .regex(/^\S+$/, 'Password cannot contain spaces.'),
     })
 
-    const { username, password } = bodySchema.parse(request.body)
+    const { usuario, senha } = bodySchema.parse(request.body)
 
     try {
       const authenticateService = container.resolve(AuthenticateService)
       const { access_token, refresh_token } = await authenticateService.execute(
         {
-          username,
-          password,
+          usuario,
+          senha,
         },
       )
       return response.status(200).send({

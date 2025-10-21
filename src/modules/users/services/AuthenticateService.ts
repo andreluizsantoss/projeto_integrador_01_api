@@ -16,10 +16,10 @@ export class AuthenticateService {
   ) {}
 
   async execute({
-    username,
-    password,
+    usuario,
+    senha,
   }: IAuthenticateUser): Promise<IAuthenticateResponse> {
-    const user = await this.usersRepository.findByUsername(username)
+    const user = await this.usersRepository.findByUsername(usuario)
     if (!user) {
       throw new InvalidCredentialsError()
     }
@@ -28,7 +28,7 @@ export class AuthenticateService {
       throw new UserNotPermissionError()
     }
 
-    const doesPasswordMatches = await compare(password, user.senha!)
+    const doesPasswordMatches = await compare(senha, user.senha!)
     if (!doesPasswordMatches) {
       throw new InvalidCredentialsError()
     }
