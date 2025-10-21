@@ -68,14 +68,14 @@
               "schema": {
                 "type": "object",
                 "properties": {
-                  "username": {
+                  "usuario": {
                     "type": "string"
                   },
-                  "password": {
+                  "senha": {
                     "type": "string"
                   }
                 },
-                "required": ["username", "password"]
+                "required": ["usuario", "senha"]
               }
             }
           }
