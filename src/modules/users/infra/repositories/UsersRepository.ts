@@ -4,10 +4,11 @@ import { IUser } from '../../domain/models/IUser'
 import { IUserDTO } from '@users/domain/models/IUserDTO'
 import { IRegisterUser } from '@users/domain/models/IRegisterUser'
 import { IUpdateUser } from '@users/domain/models/IUpdateUser'
+import { ICreateAccessAndRefreshToken } from '@users/domain/models/ICreateRefreshToken'
 
 export class UsersRepository implements IUsersRepository {
   async findByUsername(username: string) {
-    const user = await prisma.usuario.findFirst({
+    const user = await prisma.usuarios.findFirst({
       where: {
         usuario: username,
       },
@@ -16,7 +17,7 @@ export class UsersRepository implements IUsersRepository {
   }
 
   async findById(id: string): Promise<IUserDTO | null> {
-    const user = await prisma.usuario.findUnique({
+    const user = await prisma.usuarios.findUnique({
       where: {
         id: parseInt(id),
       },
@@ -25,7 +26,7 @@ export class UsersRepository implements IUsersRepository {
   }
 
   async findByToken(id: string) {
-    const user = await prisma.usuario.findFirst({
+    const user = await prisma.usuarios.findFirst({
       where: {
         id: parseInt(id),
       },
@@ -34,7 +35,7 @@ export class UsersRepository implements IUsersRepository {
   }
 
   async autenthicateUser(data: IUser) {
-    await prisma.usuario.update({
+    await prisma.usuarios.update({
       where: {
         id: data.id,
       },
@@ -42,51 +43,59 @@ export class UsersRepository implements IUsersRepository {
     })
   }
 
-  async updateRefreshToken(data: IUser) {
-    await prisma.usuario.update({
+  async updateRefreshToken(userId: string, refreshToken: string) {
+    await prisma.usuarios.update({
       where: {
-        id: data.id,
+        id: Number(userId),
       },
-      data: data,
+      data: {
+        refresh_token: refreshToken,
+      },
     })
   }
 
   async registerUser(user: IRegisterUser): Promise<void> {
-    await prisma.usuario.create({
+    const now = new Date()
+    await prisma.usuarios.create({
       data: {
-        nome: user.nome,
+        status: user.status,
+        nome_completo: user.nome_completo,
         usuario: user.usuario,
         senha: user.senha,
-        status: 'Ativo',
+        email: user.email,
+        perfil: user.perfil,
+        data_criacao: now,
       },
     })
   }
 
   async updateUser(user: IUpdateUser): Promise<void> {
-    await prisma.usuario.update({
+    await prisma.usuarios.update({
       where: {
         id: user.id,
       },
       data: {
-        nome: user.nome,
+        status: user.status,
+        nome_completo: user.nome_completo,
         usuario: user.usuario,
         senha: user.senha,
-        status: user.status,
+        email: user.email,
+        perfil: user.perfil,
       },
     })
   }
 
   async findAllUsers(): Promise<IUserDTO[]> {
-    const users = await prisma.usuario.findMany({
+    const users = await prisma.usuarios.findMany({
       orderBy: {
-        nome: 'asc',
+        nome_completo: 'asc',
       },
     })
     return users
   }
 
   async deleteUser(id: number): Promise<void> {
-    await prisma.usuario.delete({
+    await prisma.usuarios.delete({
       where: {
         id: id,
       },

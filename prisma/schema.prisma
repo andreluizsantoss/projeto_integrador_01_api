@@ -82,13 +82,16 @@ model historicoatividades {
   @@index([codigo_atividade], map: "codigo_atividade")
 }
 
-model usuario {
-  id            Int     @id @default(autoincrement())
-  nome          String  @db.VarChar(150)
-  usuario       String  @unique(map: "usuario_UNIQUE") @db.VarChar(80)
-  senha         String  @db.VarChar(20)
-  refresh_token String? @db.Text
-  status        String  @db.VarChar(15)
+model usuarios {
+  id                Int       @id @default(autoincrement())
+  status            cadastro_status
+  nome_completo     String    @db.VarChar(255)
+  usuario           String    @unique(map: "usuario_UNIQUE") @db.VarChar(100)
+  senha             String    @db.Text
+  email             String    @unique(map: "email_UNIQUE") @db.VarChar(150)
+  perfil            usuario_perfil
+  refresh_token     String?   @db.Text
+  data_criacao      DateTime  @db.Date
 }
 
 enum cadastro_sexo {
@@ -113,4 +116,9 @@ enum cadastro_status {
 enum cadastro_tipo_documento {
   RG
   CPF
+}
+
+enum usuario_perfil {
+  admin
+  operador
 }

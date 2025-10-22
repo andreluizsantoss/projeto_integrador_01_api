@@ -69,10 +69,7 @@ export class UpdateTokenService {
       issuer: 'sos-soro-pi-01',
     })
 
-    await this.usersRepository.updateRefreshToken({
-      id: user.id,
-      refresh_token: newRefreshToken,
-    })
+    await this.usersRepository.updateRefreshToken(userId, newRefreshToken)
 
     return {
       access_token: newAcessToken,

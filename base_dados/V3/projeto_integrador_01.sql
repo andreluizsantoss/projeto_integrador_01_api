@@ -1,8 +1,8 @@
 -- MySQL dump 10.13  Distrib 8.0.42, for Win64 (x86_64)
 --
--- Host: localhost    Database: projeto
+-- Host: nozomi.proxy.rlwy.net    Database: railway
 -- ------------------------------------------------------
--- Server version	8.0.42
+-- Server version	9.4.0
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -76,9 +76,7 @@ CREATE TABLE `beneficiospaciente` (
   `codigo_beneficio` varchar(10) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `cadastro_id` (`cadastro_id`),
-  KEY `codigo_beneficio` (`codigo_beneficio`),
-  CONSTRAINT `beneficiospaciente_ibfk_1` FOREIGN KEY (`cadastro_id`) REFERENCES `cadastro` (`id`),
-  CONSTRAINT `beneficiospaciente_ibfk_2` FOREIGN KEY (`codigo_beneficio`) REFERENCES `beneficiosfixos` (`codigo`)
+  KEY `codigo_beneficio` (`codigo_beneficio`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -170,9 +168,7 @@ CREATE TABLE `dependenciaspaciente` (
   `codigo_dependencia` varchar(10) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `cadastro_id` (`cadastro_id`),
-  KEY `codigo_dependencia` (`codigo_dependencia`),
-  CONSTRAINT `dependenciaspaciente_ibfk_1` FOREIGN KEY (`cadastro_id`) REFERENCES `cadastro` (`id`),
-  CONSTRAINT `dependenciaspaciente_ibfk_2` FOREIGN KEY (`codigo_dependencia`) REFERENCES `dependenciasfixas` (`codigo`)
+  KEY `codigo_dependencia` (`codigo_dependencia`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -200,9 +196,7 @@ CREATE TABLE `historicoatividades` (
   `data_atendimento` date NOT NULL,
   PRIMARY KEY (`id`),
   KEY `cadastro_id` (`cadastro_id`),
-  KEY `codigo_atividade` (`codigo_atividade`),
-  CONSTRAINT `historicoatividades_ibfk_1` FOREIGN KEY (`cadastro_id`) REFERENCES `cadastro` (`id`),
-  CONSTRAINT `historicoatividades_ibfk_2` FOREIGN KEY (`codigo_atividade`) REFERENCES `atividadesfixas` (`codigo`)
+  KEY `codigo_atividade` (`codigo_atividade`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -225,11 +219,13 @@ DROP TABLE IF EXISTS `usuarios`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `usuarios` (
   `id` int NOT NULL AUTO_INCREMENT,
+  `status` enum('Ativo','Bloqueado') NOT NULL,
   `nome_completo` varchar(255) NOT NULL,
   `usuario` varchar(100) NOT NULL,
   `senha` text NOT NULL,
   `email` varchar(150) NOT NULL,
-  `perfil` varchar(50) NOT NULL DEFAULT 'operador',
+  `perfil` enum('admin','operador') NOT NULL DEFAULT 'operador',
+  `refresh_token` text,
   `data_criacao` date NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `usuario_UNIQUE` (`usuario`),
@@ -243,7 +239,7 @@ CREATE TABLE `usuarios` (
 
 LOCK TABLES `usuarios` WRITE;
 /*!40000 ALTER TABLE `usuarios` DISABLE KEYS */;
-INSERT INTO `usuarios` VALUES (1,'Administrador','administrador','$2a$10$U.fVrFtrcqCeTwyhbx1scu/n5Pou7PJajPh3DtO2zAA6c3Ti3fGG.','exemplo@email.com','admin','2025-10-21');
+INSERT INTO `usuarios` VALUES (1,'Ativo','Administrador','administrador','$2a$10$U.fVrFtrcqCeTwyhbx1scu/n5Pou7PJajPh3DtO2zAA6c3Ti3fGG.','exemplo@email.com','admin',NULL,'2025-10-21');
 /*!40000 ALTER TABLE `usuarios` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -256,4 +252,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-10-22  9:34:08
+-- Dump completed on 2025-10-22 11:09:19

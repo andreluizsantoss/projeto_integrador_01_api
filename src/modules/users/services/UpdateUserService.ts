@@ -14,10 +14,12 @@ export class UpdateUserService {
 
   async execute({
     id,
-    nome,
+    status,
+    nome_completo,
     usuario,
     senha,
-    status,
+    email,
+    perfil,
   }: IUpdateUser): Promise<void> {
     const result = await this.usersRepository.findById(id.toString())
     if (!result) {
@@ -33,10 +35,12 @@ export class UpdateUserService {
 
     await this.usersRepository.updateUser({
       id,
-      nome,
+      status,
+      nome_completo,
       usuario,
       senha: password_hash,
-      status,
+      email,
+      perfil,
     })
   }
 }

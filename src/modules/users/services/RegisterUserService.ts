@@ -11,7 +11,14 @@ export class RegisterUserService {
     private usersRepository: IUsersRepository,
   ) {}
 
-  async execute({ nome, usuario, senha }: IRegisterUser): Promise<void> {
+  async execute({
+    status,
+    nome_completo,
+    usuario,
+    senha,
+    email,
+    perfil,
+  }: IRegisterUser): Promise<void> {
     const user = await this.usersRepository.findByUsername(usuario)
     if (user !== null) {
       throw new UserAlreadyExistsError()
@@ -20,9 +27,12 @@ export class RegisterUserService {
     const password_hash = await hash(senha, 10)
 
     await this.usersRepository.registerUser({
-      nome,
+      status,
+      nome_completo,
       usuario,
       senha: password_hash,
+      email,
+      perfil,
     })
   }
 }

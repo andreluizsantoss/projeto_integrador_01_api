@@ -1,3 +1,4 @@
+import { ICreateAccessAndRefreshToken } from '../models/ICreateRefreshToken'
 import { IRegisterUser } from '../models/IRegisterUser'
 import { IUpdateUser } from '../models/IUpdateUser'
 import { IUser } from '../models/IUser'
@@ -8,7 +9,7 @@ export interface IUsersRepository {
   findById(id: string): Promise<IUserDTO | null>
   findByToken(id: string): Promise<IUserDTO | null>
   autenthicateUser(user: IUser): Promise<void>
-  updateRefreshToken(user: IUser): Promise<void>
+  updateRefreshToken(userId: string, refreshToken: string): Promise<void>
   registerUser(user: IRegisterUser): Promise<void>
   updateUser(user: IUpdateUser): Promise<void>
   findAllUsers(): Promise<IUserDTO[]>

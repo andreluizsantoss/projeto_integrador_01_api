@@ -4,28 +4,44 @@ import { Request, Response } from 'express'
 import { container } from 'tsyringe'
 import { z } from 'zod'
 
+import { cadastro_status, usuario_perfil } from '@prisma/client'
+
 export default class RegisterUserController {
   public async register(
     request: Request,
     response: Response,
   ): Promise<Response> {
     const bodySchema = z.object({
-      nome: z.string(),
+      status: z.enum(
+        Object.values(cadastro_status) as [
+          cadastro_status,
+          ...cadastro_status[],
+        ],
+      ),
+      nome_completo: z.string(),
       usuario: z.string(),
       senha: z
         .string()
         .min(8, 'Password must be at least 8 characters long.')
         .max(32, 'Password must be a maximum of 32 characters long.')
         .regex(/^\S+$/, 'Password cannot contain spaces.'),
+      email: z.string().email(),
+      perfil: z.enum(
+        Object.values(usuario_perfil) as [usuario_perfil, ...usuario_perfil[]],
+      ),
     })
-    const { nome, usuario, senha } = bodySchema.parse(request.body)
+    const { status, nome_completo, usuario, senha, email, perfil } =
+      bodySchema.parse(request.body)
 
     try {
       const service = container.resolve(RegisterUserService)
       await service.execute({
-        nome,
+        status,
+        nome_completo,
         usuario,
         senha,
+        email,
+        perfil,
       })
       return response.status(204).send()
     } catch (err) {

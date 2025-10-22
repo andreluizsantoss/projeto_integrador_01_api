@@ -1,10 +1,12 @@
-import { Decimal } from '@prisma/client/runtime/library'
+import { cadastro_status, usuario_perfil } from '@prisma/client'
 
 export interface IUserDTO {
   id: number
-  nome?: string
-  usuario?: string
-  senha?: string
+  status: cadastro_status
+  nome_completo: string
+  usuario: string
+  senha: string
+  email: string
+  perfil: usuario_perfil
   refresh_token?: string
-  status?: string
 }
