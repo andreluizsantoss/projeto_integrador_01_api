@@ -5,6 +5,9 @@ import { container } from 'tsyringe'
 import { z } from 'zod'
 
 import { cadastro_status, usuario_perfil } from '@prisma/client'
+import { DocumentAlreadyExistsError } from '@shared/errors/DocumentAlreadyExistsError'
+import { CodeUserAlreadyExistsError } from '@shared/errors/CodeUserAlreadyExistsError'
+import { UniqueConstraintError } from '@shared/errors/UniqueConstraintError'
 
 export default class RegisterUserController {
   public async register(
@@ -47,6 +50,13 @@ export default class RegisterUserController {
     } catch (err) {
       if (err instanceof UserAlreadyExistsError) {
         return response.status(400).send({ message: err.message })
+      }
+      if (
+        err instanceof DocumentAlreadyExistsError ||
+        err instanceof CodeUserAlreadyExistsError ||
+        err instanceof UniqueConstraintError
+      ) {
+        return response.status(409).json({ message: err.message })
       }
       throw err
     }

@@ -4,7 +4,6 @@ import { IUser } from '../../domain/models/IUser'
 import { IUserDTO } from '@users/domain/models/IUserDTO'
 import { IRegisterUser } from '@users/domain/models/IRegisterUser'
 import { IUpdateUser } from '@users/domain/models/IUpdateUser'
-import { ICreateAccessAndRefreshToken } from '@users/domain/models/ICreateRefreshToken'
 
 export class UsersRepository implements IUsersRepository {
   async findByUsername(username: string) {
@@ -100,5 +99,28 @@ export class UsersRepository implements IUsersRepository {
         id: id,
       },
     })
+  }
+
+  async findUserByUserOrEmail(
+    user: string,
+    email: string,
+    excludeId: number,
+  ): Promise<IUserDTO | null> {
+    const result = await prisma.usuarios.findFirst({
+      where: {
+        OR: [
+          {
+            usuario: user,
+          },
+          {
+            email: email,
+          },
+        ],
+        NOT: {
+          id: excludeId,
+        },
+      },
+    })
+    return result
   }
 }

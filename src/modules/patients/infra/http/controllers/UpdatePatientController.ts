@@ -9,8 +9,10 @@ import {
   cadastro_sexo,
   cadastro_status,
   cadastro_tipo_documento,
-  Prisma,
 } from '@prisma/client'
+import { DocumentAlreadyExistsError } from '@shared/errors/DocumentAlreadyExistsError'
+import { CodeUserAlreadyExistsError } from '@shared/errors/CodeUserAlreadyExistsError'
+import { UniqueConstraintError } from '@shared/errors/UniqueConstraintError'
 
 const estadoCivilMap = {
   Solteiro: 'Solteiro',
@@ -108,15 +110,12 @@ export default class UpdatePatientController {
           message: 'The document must contain only numbers !',
         })
       }
-      const target = err.meta?.target as string[] | undefined
       if (
-        err instanceof Prisma.PrismaClientKnownRequestError &&
-        err.code === 'P2002' &&
-        target?.includes('documento')
+        err instanceof DocumentAlreadyExistsError ||
+        err instanceof CodeUserAlreadyExistsError ||
+        err instanceof UniqueConstraintError
       ) {
-        return response.status(400).send({
-          message: 'The document is already registered in the database !',
-        })
+        return response.status(409).json({ message: err.message })
       }
       if (err instanceof PatientNotFoundError) {
         return response.status(400).send({ message: err.message })

@@ -8,4 +8,9 @@ export interface IPatientsRepository {
   registerPatient(patient: IRegisterPatient): Promise<IPatientDTO | null>
   updatePatient(patient: IPatient): Promise<IPatientDTO | null>
   deletePatient(id: number): Promise<void>
+  findPatientByDocumentOrCodeUser(
+    documento: string,
+    codigo_usuario: string,
+    excludeId: number,
+  ): Promise<IPatientDTO | null>
 }

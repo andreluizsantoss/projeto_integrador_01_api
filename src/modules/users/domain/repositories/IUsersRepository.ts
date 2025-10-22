@@ -14,4 +14,9 @@ export interface IUsersRepository {
   updateUser(user: IUpdateUser): Promise<void>
   findAllUsers(): Promise<IUserDTO[]>
   deleteUser(id: number): Promise<void>
+  findUserByUserOrEmail(
+    user: string,
+    email: string,
+    excludeId: number,
+  ): Promise<IUserDTO | null>
 }

@@ -7,6 +7,9 @@ import { UserAlreadyExistsError } from '@shared/errors/UserAlreadyExistsError'
 import { UserNotFoundError } from '@shared/errors/UserNotFoundError'
 
 import { cadastro_status, usuario_perfil } from '@prisma/client'
+import { DocumentAlreadyExistsError } from '@shared/errors/DocumentAlreadyExistsError'
+import { CodeUserAlreadyExistsError } from '@shared/errors/CodeUserAlreadyExistsError'
+import { UniqueConstraintError } from '@shared/errors/UniqueConstraintError'
 
 export default class UpdateUserController {
   public async update(request: Request, response: Response): Promise<Response> {
@@ -51,6 +54,13 @@ export default class UpdateUserController {
       }
       if (err instanceof UserAlreadyExistsError) {
         return response.status(400).send({ message: err.message })
+      }
+      if (
+        err instanceof DocumentAlreadyExistsError ||
+        err instanceof CodeUserAlreadyExistsError ||
+        err instanceof UniqueConstraintError
+      ) {
+        return response.status(409).json({ message: err.message })
       }
       throw err
     }
