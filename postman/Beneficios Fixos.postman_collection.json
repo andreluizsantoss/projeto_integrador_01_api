@@ -16,26 +16,35 @@
 							""
 						],
 						"type": "text/javascript",
-						"packages": {}
+						"packages": {},
+						"requests": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"if (pm.globals.get(\"access_token\")) {\r",
+							"  pm.request.headers.add({\r",
+							"    key: \"Authorization\",\r",
+							"    value: \"Bearer \" + pm.globals.get(\"access_token\")\r",
+							"  });\r",
+							"}"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
 					}
 				}
 			],
 			"request": {
 				"method": "GET",
-				"header": [
-					{
-						"key": "Authorization",
-						"value": "{{access_token}}",
-						"type": "text"
-					}
-				],
+				"header": [],
 				"url": {
-					"raw": "http://localhost:3001/fixed-benefit/",
-					"protocol": "http",
+					"raw": "{{server_url}}/fixed-benefit/",
 					"host": [
-						"localhost"
+						"{{server_url}}"
 					],
-					"port": "3001",
 					"path": [
 						"fixed-benefit",
 						""
@@ -54,19 +63,30 @@
 							""
 						],
 						"type": "text/javascript",
-						"packages": {}
+						"packages": {},
+						"requests": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"if (pm.globals.get(\"access_token\")) {\r",
+							"  pm.request.headers.add({\r",
+							"    key: \"Authorization\",\r",
+							"    value: \"Bearer \" + pm.globals.get(\"access_token\")\r",
+							"  });\r",
+							"}"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
 					}
 				}
 			],
 			"request": {
 				"method": "POST",
-				"header": [
-					{
-						"key": "Authorization",
-						"value": "{{access_token}}",
-						"type": "text"
-					}
-				],
+				"header": [],
 				"body": {
 					"mode": "raw",
 					"raw": "{\r\n    \"descricao\": \"Teste Benefício\"\r\n}",
@@ -77,12 +97,10 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:3001/fixed-benefit/",
-					"protocol": "http",
+					"raw": "{{server_url}}/fixed-benefit/",
 					"host": [
-						"localhost"
+						"{{server_url}}"
 					],
-					"port": "3001",
 					"path": [
 						"fixed-benefit",
 						""
@@ -101,22 +119,33 @@
 							""
 						],
 						"type": "text/javascript",
-						"packages": {}
+						"packages": {},
+						"requests": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"if (pm.globals.get(\"access_token\")) {\r",
+							"  pm.request.headers.add({\r",
+							"    key: \"Authorization\",\r",
+							"    value: \"Bearer \" + pm.globals.get(\"access_token\")\r",
+							"  });\r",
+							"}"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
 					}
 				}
 			],
 			"request": {
 				"method": "PUT",
-				"header": [
-					{
-						"key": "Authorization",
-						"value": "{{access_token}}",
-						"type": "text"
-					}
-				],
+				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"codigo\": \"B05\",\r\n    \"descricao\": \"Teste - Benefício - Update\"\r\n}",
+					"raw": "{\r\n    \"codigo\": \"B03\",\r\n    \"descricao\": \"Teste - Benefício - Update\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -124,12 +153,10 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:3001/fixed-benefit/",
-					"protocol": "http",
+					"raw": "{{server_url}}/fixed-benefit/",
 					"host": [
-						"localhost"
+						"{{server_url}}"
 					],
-					"port": "3001",
 					"path": [
 						"fixed-benefit",
 						""
@@ -148,26 +175,35 @@
 							""
 						],
 						"type": "text/javascript",
-						"packages": {}
+						"packages": {},
+						"requests": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"if (pm.globals.get(\"access_token\")) {\r",
+							"  pm.request.headers.add({\r",
+							"    key: \"Authorization\",\r",
+							"    value: \"Bearer \" + pm.globals.get(\"access_token\")\r",
+							"  });\r",
+							"}"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
 					}
 				}
 			],
 			"request": {
 				"method": "GET",
-				"header": [
-					{
-						"key": "Authorization",
-						"value": "{{access_token}}",
-						"type": "text"
-					}
-				],
+				"header": [],
 				"url": {
-					"raw": "http://localhost:3001/fixed-benefit/codigo?codigo=B05",
-					"protocol": "http",
+					"raw": "{{server_url}}/fixed-benefit/codigo?codigo=B03",
 					"host": [
-						"localhost"
+						"{{server_url}}"
 					],
-					"port": "3001",
 					"path": [
 						"fixed-benefit",
 						"codigo"
@@ -175,7 +211,7 @@
 					"query": [
 						{
 							"key": "codigo",
-							"value": "B05"
+							"value": "B03"
 						}
 					]
 				}
@@ -192,26 +228,35 @@
 							""
 						],
 						"type": "text/javascript",
-						"packages": {}
+						"packages": {},
+						"requests": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"if (pm.globals.get(\"access_token\")) {\r",
+							"  pm.request.headers.add({\r",
+							"    key: \"Authorization\",\r",
+							"    value: \"Bearer \" + pm.globals.get(\"access_token\")\r",
+							"  });\r",
+							"}"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
 					}
 				}
 			],
 			"request": {
 				"method": "DELETE",
-				"header": [
-					{
-						"key": "Authorization",
-						"value": "{{access_token}}",
-						"type": "text"
-					}
-				],
+				"header": [],
 				"url": {
-					"raw": "http://localhost:3001/fixed-benefit/?codigo=B05",
-					"protocol": "http",
+					"raw": "{{server_url}}/fixed-benefit/?codigo=B03",
 					"host": [
-						"localhost"
+						"{{server_url}}"
 					],
-					"port": "3001",
 					"path": [
 						"fixed-benefit",
 						""
@@ -219,7 +264,7 @@
 					"query": [
 						{
 							"key": "codigo",
-							"value": "B05"
+							"value": "B03"
 						}
 					]
 				}

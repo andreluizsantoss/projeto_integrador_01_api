@@ -16,26 +16,35 @@
 							""
 						],
 						"type": "text/javascript",
-						"packages": {}
+						"packages": {},
+						"requests": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"if (pm.globals.get(\"access_token\")) {\r",
+							"  pm.request.headers.add({\r",
+							"    key: \"Authorization\",\r",
+							"    value: \"Bearer \" + pm.globals.get(\"access_token\")\r",
+							"  });\r",
+							"}"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
 					}
 				}
 			],
 			"request": {
 				"method": "GET",
-				"header": [
-					{
-						"key": "Authorization",
-						"value": "{{access_token}}",
-						"type": "text"
-					}
-				],
+				"header": [],
 				"url": {
-					"raw": "http://localhost:3001/user",
-					"protocol": "http",
+					"raw": "{{server_url}}/user",
 					"host": [
-						"localhost"
+						"{{server_url}}"
 					],
-					"port": "3001",
 					"path": [
 						"user"
 					]
@@ -53,22 +62,33 @@
 							""
 						],
 						"type": "text/javascript",
-						"packages": {}
+						"packages": {},
+						"requests": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"if (pm.globals.get(\"access_token\")) {\r",
+							"  pm.request.headers.add({\r",
+							"    key: \"Authorization\",\r",
+							"    value: \"Bearer \" + pm.globals.get(\"access_token\")\r",
+							"  });\r",
+							"}"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
 					}
 				}
 			],
 			"request": {
 				"method": "POST",
-				"header": [
-					{
-						"key": "Authorization",
-						"value": "{{access_token}}",
-						"type": "text"
-					}
-				],
+				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"nome\": \"José Vieria\",\r\n    \"usuario\": \"jose.veira\",\r\n    \"senha\": \"123123123\"\r\n}",
+					"raw": "{\r\n    \"status\": \"Ativo\",\r\n    \"nome_completo\": \"Usuário Teste\",\r\n    \"usuario\": \"teste\",\r\n    \"senha\": \"teste123\",\r\n    \"email\": \"teste@teste.com.br\",\r\n    \"perfil\": \"operador\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -76,12 +96,10 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:3001/user",
-					"protocol": "http",
+					"raw": "{{server_url}}/user",
 					"host": [
-						"localhost"
+						"{{server_url}}"
 					],
-					"port": "3001",
 					"path": [
 						"user"
 					]
@@ -99,22 +117,33 @@
 							""
 						],
 						"type": "text/javascript",
-						"packages": {}
+						"packages": {},
+						"requests": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"if (pm.globals.get(\"access_token\")) {\r",
+							"  pm.request.headers.add({\r",
+							"    key: \"Authorization\",\r",
+							"    value: \"Bearer \" + pm.globals.get(\"access_token\")\r",
+							"  });\r",
+							"}"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
 					}
 				}
 			],
 			"request": {
 				"method": "PUT",
-				"header": [
-					{
-						"key": "Authorization",
-						"value": "{{access_token}}",
-						"type": "text"
-					}
-				],
+				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{   \r\n    \"id\": \"2\",\r\n    \"nome\": \"José Vieria\",\r\n    \"usuario\": \"jose.vieira\",\r\n    \"senha\": \"123456789\",\r\n    \"status\": \"Ativo\"\r\n}",
+					"raw": "{   \r\n    \"id\": \"2\",\r\n    \"status\": \"Ativo\",\r\n    \"nome_completo\": \"Usuário Teste - Update\",\r\n    \"usuario\": \"teste\",\r\n    \"senha\": \"teste123\",\r\n    \"email\": \"teste@teste.com.br\",\r\n    \"perfil\": \"operador\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -122,12 +151,10 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:3001/user",
-					"protocol": "http",
+					"raw": "{{server_url}}/user",
 					"host": [
-						"localhost"
+						"{{server_url}}"
 					],
-					"port": "3001",
 					"path": [
 						"user"
 					]
@@ -145,26 +172,35 @@
 							""
 						],
 						"type": "text/javascript",
-						"packages": {}
+						"packages": {},
+						"requests": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"if (pm.globals.get(\"access_token\")) {\r",
+							"  pm.request.headers.add({\r",
+							"    key: \"Authorization\",\r",
+							"    value: \"Bearer \" + pm.globals.get(\"access_token\")\r",
+							"  });\r",
+							"}"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
 					}
 				}
 			],
 			"request": {
 				"method": "GET",
-				"header": [
-					{
-						"key": "Authorization",
-						"value": "{{access_token}}",
-						"type": "text"
-					}
-				],
+				"header": [],
 				"url": {
-					"raw": "http://localhost:3001/user/id?id=1",
-					"protocol": "http",
+					"raw": "{{server_url}}/user/id?id=1",
 					"host": [
-						"localhost"
+						"{{server_url}}"
 					],
-					"port": "3001",
 					"path": [
 						"user",
 						"id"
@@ -189,26 +225,35 @@
 							""
 						],
 						"type": "text/javascript",
-						"packages": {}
+						"packages": {},
+						"requests": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"if (pm.globals.get(\"access_token\")) {\r",
+							"  pm.request.headers.add({\r",
+							"    key: \"Authorization\",\r",
+							"    value: \"Bearer \" + pm.globals.get(\"access_token\")\r",
+							"  });\r",
+							"}"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
 					}
 				}
 			],
 			"request": {
 				"method": "DELETE",
-				"header": [
-					{
-						"key": "Authorization",
-						"value": "{{access_token}}",
-						"type": "text"
-					}
-				],
+				"header": [],
 				"url": {
-					"raw": "http://localhost:3001/user?id=2",
-					"protocol": "http",
+					"raw": "{{server_url}}/user?id=2",
 					"host": [
-						"localhost"
+						"{{server_url}}"
 					],
-					"port": "3001",
 					"path": [
 						"user"
 					],

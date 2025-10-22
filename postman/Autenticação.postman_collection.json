@@ -13,14 +13,22 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							"var jsonData = pm.response.json();\r",
-							"pm.globals.set('access_token', jsonData.access_token);\r",
-							"\r",
-							"var jsonData = pm.response.json();\r",
-							"pm.globals.set('refresh_token', jsonData.refresh_token);"
+							"try {\r",
+							"  var jsonData = pm.response.json();\r",
+							"  if (jsonData.access_token) {\r",
+							"    pm.globals.set(\"access_token\", jsonData.access_token);\r",
+							"  }\r",
+							"  if (jsonData.refresh_token) {\r",
+							"    pm.globals.set(\"refresh_token\", jsonData.refresh_token);\r",
+							"  }\r",
+							"} catch (e) {\r",
+							"  console.log(\"Response is not JSON:\", e);\r",
+							"}\r",
+							""
 						],
 						"type": "text/javascript",
-						"packages": {}
+						"packages": {},
+						"requests": {}
 					}
 				}
 			],
@@ -29,7 +37,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"username\": \"andre.santos\",\r\n    \"password\": \"123456789\"\r\n}",
+					"raw": "{\r\n    \"usuario\": \"administrador\",\r\n    \"senha\": \"administrador\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -37,12 +45,10 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:3001/authenticate/session",
-					"protocol": "http",
+					"raw": "{{server_url}}/authenticate/session",
 					"host": [
-						"localhost"
+						"{{server_url}}"
 					],
-					"port": "3001",
 					"path": [
 						"authenticate",
 						"session"
@@ -61,26 +67,36 @@
 							""
 						],
 						"type": "text/javascript",
-						"packages": {}
+						"packages": {},
+						"requests": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"if (pm.globals.get(\"access_token\")) {\r",
+							"  pm.request.headers.add({\r",
+							"    key: \"Authorization\",\r",
+							"    value: \"Bearer \" + pm.globals.get(\"access_token\")\r",
+							"  });\r",
+							"}\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
 					}
 				}
 			],
 			"request": {
 				"method": "GET",
-				"header": [
-					{
-						"key": "Authorization",
-						"value": "{{access_token}}",
-						"type": "text"
-					}
-				],
+				"header": [],
 				"url": {
-					"raw": "http://localhost:3001/authenticate/find-token",
-					"protocol": "http",
+					"raw": "{{server_url}}/authenticate/find-token",
 					"host": [
-						"localhost"
+						"{{server_url}}"
 					],
-					"port": "3001",
 					"path": [
 						"authenticate",
 						"find-token"
@@ -96,26 +112,43 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							"var jsonData = pm.response.json();\r",
-							"pm.globals.set('access_token', jsonData.access_token);\r",
-							"\r",
-							"var jsonData = pm.response.json();\r",
-							"pm.globals.set('refresh_token', jsonData.refresh_token);"
+							"try {\r",
+							"  var jsonData = pm.response.json();\r",
+							"  if (jsonData.access_token) {\r",
+							"    pm.globals.set(\"access_token\", jsonData.access_token);\r",
+							"  }\r",
+							"  if (jsonData.refresh_token) {\r",
+							"    pm.globals.set(\"refresh_token\", jsonData.refresh_token);\r",
+							"  }\r",
+							"} catch (e) {\r",
+							"  console.log(\"Response is not JSON:\", e);\r",
+							"}"
 						],
 						"type": "text/javascript",
-						"packages": {}
+						"packages": {},
+						"requests": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"if (pm.globals.get(\"access_token\")) {\r",
+							"  pm.request.headers.add({\r",
+							"    key: \"Authorization\",\r",
+							"    value: \"Bearer \" + pm.globals.get(\"access_token\")\r",
+							"  });\r",
+							"}"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
 					}
 				}
 			],
 			"request": {
 				"method": "PATCH",
-				"header": [
-					{
-						"key": "Authorization",
-						"value": "{{access_token}}",
-						"type": "text"
-					}
-				],
+				"header": [],
 				"body": {
 					"mode": "raw",
 					"raw": "{\r\n    \"refreshToken\": \"{{refresh_token}}\"\r\n}",
@@ -126,12 +159,10 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:3001/authenticate/refresh-token",
-					"protocol": "http",
+					"raw": "{{server_url}}/authenticate/refresh-token",
 					"host": [
-						"localhost"
+						"{{server_url}}"
 					],
-					"port": "3001",
 					"path": [
 						"authenticate",
 						"refresh-token"
