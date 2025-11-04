@@ -5,7 +5,7 @@ import Dashboard from './pages/Dashboard';
 import PatientForm from './pages/PatientForm';
 import Activities from './pages/Activities';
 import Users from './pages/Users';
-import './styles/app.css';
+import './Styles/App.css';
 
 function App() {
   const isAuthenticated = localStorage.getItem('token');
