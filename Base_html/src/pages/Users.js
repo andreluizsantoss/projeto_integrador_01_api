@@ -101,7 +101,7 @@ function Users() {
               </tr>
             ) : (
               filteredPatients.map((patient) => (
-                <tr key={patient.id} onClick={() => window.open(`https://sos-projeto-integrador.vercel.app/userinfo?id=${patient.id}`, '_blank')} style={{ cursor: 'pointer' }}>
+                <tr key={patient.id} onClick={() => window.open(`${window.location.origin}/userinfo?id=${patient.id}`, '_blank')} style={{ cursor: 'pointer' }}>
                   <td><strong>{patient.nome}</strong></td>
                   <td>{patient.idade}</td>
                   <td>{patient.documento}</td>
