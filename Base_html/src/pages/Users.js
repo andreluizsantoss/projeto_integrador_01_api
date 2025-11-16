@@ -1,17 +1,25 @@
-import React, { useState, useMemo, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import Layout from '../components/Layout';
 import api from '../services/api';
 
-function Users() {
-  const [searchTerm, setSearchTerm] = useState('');
-  const [patients, setPatients] = useState([]);
+function UserInfo() {
+  const [patient, setPatient] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    loadPatients();
+    const urlParams = new URLSearchParams(window.location.search);
+    const patientId = urlParams.get('id');
+    
+    if (patientId) {
+      loadPatientInfo(patientId);
+    } else {
+      setError('ID do paciente não fornecido');
+      setLoading(false);
+    }
   }, []);
 
-  const loadPatients = async () => {
+  const loadPatientInfo = async (id) => {
     try {
       const token = localStorage.getItem('token');
       if (!token) {
@@ -19,32 +27,42 @@ function Users() {
         return;
       }
 
+      // First get all patients
       const response = await api.get('/patient');
-      const data = response.data;
-      setPatients(data);
+      const patients = response.data;
+      
+      // Find patient by ID
+      const patient = patients.find(p => p.id == id);
+      
+      if (patient) {
+        setPatient(patient);
+      } else {
+        setError('Paciente não encontrado');
+      }
       setLoading(false);
-
     } catch (error) {
       console.error('Erro:', error);
+      setError('Erro ao carregar informações do paciente');
       setLoading(false);
     }
   };
-
-  const filteredPatients = useMemo(() => {
-    if (!searchTerm) return patients;
-    const term = searchTerm.toLowerCase();
-    return patients.filter(patient => 
-      patient.nome?.toLowerCase().includes(term) ||
-      patient.documento?.toLowerCase().includes(term) ||
-      patient.profissao?.toLowerCase().includes(term)
-    );
-  }, [searchTerm, patients]);
 
   if (loading) {
     return (
       <Layout>
         <div style={{ textAlign: 'center', padding: '2rem' }}>
-          <p>Carregando usuários...</p>
+          <p>Carregando informações...</p>
+        </div>
+      </Layout>
+    );
+  }
+
+  if (error) {
+    return (
+      <Layout>
+        <div style={{ textAlign: 'center', padding: '2rem' }}>
+          <p style={{ color: 'red' }}>{error}</p>
+          <button onClick={() => window.history.back()}>Voltar</button>
         </div>
       </Layout>
     );
@@ -53,77 +71,88 @@ function Users() {
   return (
     <Layout>
       <section>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
-          <h2>Lista de Usuários ({patients.length})</h2>
-          <button 
-            onClick={loadPatients} 
-            className="btn-secondary"
-            style={{ fontSize: '0.875rem', padding: '0.5rem 1rem' }}
-          >
-            🔄 Atualizar
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem' }}>
+          <h2>Informações do Paciente</h2>
+          <button onClick={() => window.history.back()} className="btn-secondary">
+            ← Voltar
           </button>
         </div>
-        
-        <div className="search-container">
-          <input 
-            type="text" 
-            placeholder="Buscar por nome, documento ou profissão..." 
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-          />
-          <small className="help-text">
-            {filteredPatients.length} resultado(s) encontrado(s)
-          </small>
-        </div>
-      </section>
 
-      <div className="table">
-        <table>
-          <thead>
-            <tr>
-              <th>Nome</th>
-              <th>Idade</th>
-              <th>Documento</th>
-              <th>Status</th>
-              <th>Profissão</th>
-              <th>Morador de Rua</th>
-            </tr>
-          </thead>
-          <tbody>
-            {filteredPatients.length === 0 ? (
-              <tr>
-                <td colSpan="6" className="no-results">
-                  <div className="empty-state">
-                    <p>Nenhum usuário encontrado</p>
-                    <small>Tente ajustar os termos de busca</small>
-                  </div>
-                </td>
-              </tr>
-            ) : (
-              filteredPatients.map((patient) => (
-                <tr key={patient.id} onClick={() => window.open(`/build/userinfo.html?id=${patient.id}`, '_blank')} style={{ cursor: 'pointer' }}>
-                  <td><strong>{patient.nome}</strong></td>
-                  <td>{patient.idade}</td>
-                  <td>{patient.documento}</td>
-                  <td>
-                    <span className={`status-badge ${patient.status?.toLowerCase()}`}>
-                      {patient.status}
-                    </span>
-                  </td>
-                  <td>{patient.profissao}</td>
-                  <td>
-                    <span className={patient.morador_rua ? 'status-badge ativo' : 'status-badge unknown'}>
-                      {patient.morador_rua ? 'Sim' : 'Não'}
-                    </span>
-                  </td>
-                </tr>
-              ))
-            )}
-          </tbody>
-        </table>
-      </div>
+        {patient && (
+          <div className="patient-info">
+            <div className="info-grid">
+              <div className="info-section">
+                <h3>Dados Pessoais</h3>
+                <div className="info-item">
+                  <strong>Nome:</strong> {patient.nome}
+                </div>
+                <div className="info-item">
+                  <strong>Idade:</strong> {patient.idade} anos
+                </div>
+                <div className="info-item">
+                  <strong>Data de Nascimento:</strong> {new Date(patient.data_nascimento).toLocaleDateString('pt-BR')}
+                </div>
+                <div className="info-item">
+                  <strong>Sexo:</strong> {patient.sexo}
+                </div>
+                <div className="info-item">
+                  <strong>Estado Civil:</strong> {patient.estado_civil}
+                </div>
+                <div className="info-item">
+                  <strong>Etnia:</strong> {patient.etnia || 'Não informado'}
+                </div>
+              </div>
+
+              <div className="info-section">
+                <h3>Documentação</h3>
+                <div className="info-item">
+                  <strong>Tipo:</strong> {patient.tipo_documento}
+                </div>
+                <div className="info-item">
+                  <strong>Documento:</strong> {patient.documento}
+                </div>
+                <div className="info-item">
+                  <strong>Status:</strong> 
+                  <span className={`status-badge ${patient.status?.toLowerCase()}`}>
+                    {patient.status}
+                  </span>
+                </div>
+              </div>
+
+              <div className="info-section">
+                <h3>Informações Profissionais</h3>
+                <div className="info-item">
+                  <strong>Profissão:</strong> {patient.profissao || 'Não informado'}
+                </div>
+                <div className="info-item">
+                  <strong>Morador de Rua:</strong> 
+                  <span className={patient.morador_rua ? 'status-badge ativo' : 'status-badge unknown'}>
+                    {patient.morador_rua ? 'Sim' : 'Não'}
+                  </span>
+                </div>
+              </div>
+
+              <div className="info-section">
+                <h3>Características Físicas</h3>
+                <div className="info-item">
+                  <strong>Altura:</strong> {patient.altura ? `${patient.altura} m` : 'Não informado'}
+                </div>
+                <div className="info-item">
+                  <strong>Peso:</strong> {patient.peso ? `${patient.peso} kg` : 'Não informado'}
+                </div>
+                <div className="info-item">
+                  <strong>Cor dos Olhos:</strong> {patient.cor_olhos || 'Não informado'}
+                </div>
+                <div className="info-item">
+                  <strong>Cor do Cabelo:</strong> {patient.cor_cabelo || 'Não informado'}
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+      </section>
     </Layout>
   );
 }
 
-export default Users;
+export default UserInfo;
