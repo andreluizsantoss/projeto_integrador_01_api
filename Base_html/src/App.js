@@ -5,6 +5,7 @@ import Dashboard from './pages/Dashboard';
 import PatientForm from './pages/PatientForm';
 import Activities from './pages/Activities';
 import Users from './pages/Users';
+import info from '.pages/usersinfo';
 import './Styles/App.css';
 
 function App() {
@@ -44,6 +45,10 @@ function App() {
           />
           <Route 
             path="/usuarios" 
+            element={isAuthenticated ? <Users /> : <Navigate to="/login" replace />} 
+          />
+          <Route 
+            path="/uerinfo" 
             element={isAuthenticated ? <Users /> : <Navigate to="/login" replace />} 
           />
           <Route path="/" element={<Navigate to={isAuthenticated ? "/dashboard" : "/login"} replace />} />
