@@ -8,8 +8,10 @@ function UserInfo() {
   const [error, setError] = useState(null);
 
   useEffect(() => {
+    console.log('UserInfo component mounted');
     const urlParams = new URLSearchParams(window.location.search);
     const patientId = urlParams.get('id');
+    console.log('Patient ID from URL:', patientId);
     
     if (patientId) {
       loadPatientInfo(patientId);
@@ -21,18 +23,36 @@ function UserInfo() {
 
   const loadPatientInfo = async (id) => {
     try {
+      console.log('Loading patient info for ID:', id);
       const token = localStorage.getItem('token');
+      console.log('Token exists:', !!token);
+      
       if (!token) {
+        console.log('No token, redirecting to login');
         window.location.href = '/login';
         return;
       }
 
-      const response = await api.get(`/patient/${id}`);
-      setPatient(response.data);
+      console.log('Fetching patients from API...');
+      const response = await api.get('/patient');
+      const patients = response.data;
+      console.log('Patients received:', patients.length);
+      
+      // Find patient by ID
+      const patient = patients.find(p => p.id == id);
+      console.log('Found patient:', patient);
+      
+      if (patient) {
+        setPatient(patient);
+        console.log('Patient set successfully');
+      } else {
+        console.log('Patient not found');
+        setError('Paciente não encontrado');
+      }
       setLoading(false);
     } catch (error) {
-      console.error('Erro:', error);
-      setError('Erro ao carregar informações do paciente');
+      console.error('Error loading patient:', error);
+      setError('Erro ao carregar informações do paciente: ' + error.message);
       setLoading(false);
     }
   };
