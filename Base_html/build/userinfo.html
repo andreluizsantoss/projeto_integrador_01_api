@@ -14,9 +14,7 @@
     <script type="text/babel">
         const { useState, useEffect } = React;
 
-        const API_BASE = process?.env?.NODE_ENV === 'production' 
-            ? 'https://projeto-integrador-01-api.onrender.com'
-            : 'http://localhost:3001';
+        const API_BASE = 'https://projeto-integrador-01-api.onrender.com';
 
         function Profile() {
             const [patient, setPatient] = useState(null);
@@ -373,4 +371,5 @@
 </body>
 
 </html>
+
 
